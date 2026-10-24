@@ -448,7 +448,7 @@
     "required": false,
     "topic": "where-to-turn",
     "character": "Jindřich (Uši pro duši)",
-    "text": "U stanu Uší pro duši tě zastaví Jindřich: „Ahoj, jsem Jindřich. Víš, že jsme tu i pro vedoucí a servis, nejen pro děti?“",
+    "text": "U stanu Uší pro duši tě zastaví Jindřich: „Ahoj, jsem Jindřich, jeden z týmu Uší pro duši. Víš, že jsme tu i pro vedoucí a servis, nejen pro děti?“",
     "left": { "label": "„Díky, ale to já nepotřebuju.“", "effect": { "trust": -5, "energy": 5 } },
     "right": { "label": "Zastavím se a zjistím, kde je najdu a kdy mají otevřeno.", "effect": { "energy": -5 } },
     "log": "Uši pro duši jsou na akci pro každého – děti, vedoucí i servis. Najdeš je i přes infostan."
@@ -519,16 +519,16 @@
   },
   {
     "id": "leaky-tent",
-    "intended": "right",
+    "intended": "left",
     "day": 1,
     "slot": "evening",
     "required": false,
     "topic": "one-on-one",
-    "character": "Tvůj stan",
-    "text": "Ve stanu vedoucích teče střecha. Ve stanu dětí je místo navíc a děti volají: „Spi s námi!“",
-    "left": { "label": "Vyspím se s dětmi, jen dneska.", "effect": { "safety": -15, "trust": 10, "energy": 10 } },
-    "right": { "label": "S Kubou zalepíme střechu izolepou a spím ve stanu vedoucích.", "effect": { "crew": 5, "energy": -5 } },
-    "log": "Dospělí nespí ve stanu s dětmi. Chrání to děti i tebe – i když jde o jednu noc."
+    "character": "Zuzka (10)",
+    "text": "Bouřka. Ve stanu vedoucích teče střecha a Zuzka ve stanu dětí pláče, že se bojí: „Spi s námi!“",
+    "left": { "label": "Vezmu si spacák do velkého stanu, kde spí všechny čtyři holky.", "effect": { "trust": 5, "energy": 5 } },
+    "right": { "label": "Vezmu Zuzku k sobě do dvojáku, ať ostatní nebudí.", "effect": { "safety": -20, "trust": 10 } },
+    "log": "Spát ve stanu s dětmi se občas stane – třeba když se bojí. Nikdy ale jen ve dvou: jeden dospělý a jedno dítě."
   },
   {
     "id": "night-latrine",
@@ -620,7 +620,7 @@
   },
   {
     "id": "sunscreen",
-    "intended": "left",
+    "intended": "both",
     "day": 2,
     "slot": "morning",
     "required": false,
@@ -628,8 +628,8 @@
     "character": "Bára (12)",
     "text": "Bára ti podává opalovací krém: „Namažeš mi záda?“",
     "left": { "label": "Poprosím kamarádku z posádky, ať jí pomůže, a dám krém i ostatním.", "effect": { "crew": 5 } },
-    "right": { "label": "„Jasně, otoč se.“", "effect": { "trust": 10, "safety": -10 } },
-    "log": "Kde to jde, ať si děti pomáhají navzájem. Dotyky dospělých omezuj na nutné situace."
+    "right": { "label": "„Jasně, otoč se.“", "effect": { "trust": 5, "safety": -5 } },
+    "log": "Kde to jde, ať si děti pomáhají navzájem. Když to jinak nejde, namazat záda není nic špatného – jen ať je to vidět a dítěti je to příjemné."
   },
   {
     "id": "carried-favourite",
@@ -804,7 +804,7 @@
     "topic": "where-to-turn",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba vypadá zničeně. Přizná, že doma řeší rozchod a tady to na něj všechno padá.",
-    "left": { "label": "Pošlu ho za Jindřichem do Uší pro duši a dopolední program převezmu.", "effect": { "crew": 5, "energy": -5 } },
+    "left": { "label": "Pošlu ho do Uší pro duši a dopolední program převezmu.", "effect": { "crew": 5, "energy": -5 } },
     "right": { "label": "„Hlavu vzhůru, to přejde. Máme program.“", "effect": { "crew": -5, "trust": -10, "energy": 5 } },
     "log": "Uši pro duši jsou i pro dospělé. Kolega na dně neohrožuje jen sebe, ale i děti, za které odpovídá."
   },
@@ -881,7 +881,7 @@
     "topic": "self-care",
     "character": "Jindřich (Uši pro duši)",
     "text": "Odpoledne tě přepadne tíha: málo spánku, hluk, zodpovědnost. Chce se ti brečet.",
-    "left": { "label": "Zajdu na chvilku za Jindřichem do Uší pro duši.", "effect": { "energy": 15, "crew": -5 } },
+    "left": { "label": "Zajdu na chvilku do Uší pro duši.", "effect": { "energy": 15, "crew": -5 } },
     "right": { "label": "Zatnu zuby, večer je program.", "effect": { "energy": -15, "safety": 5 } },
     "log": "Být na dně je normální. Uši pro duši jsou tu i pro tebe – pomoct sobě je součást odpovědnosti."
   },
@@ -920,8 +920,8 @@
     "character": "Ondrův táta",
     "text": "U vstupu stojí Ondrův táta: „Jen ho vezmu na oběd do města.“ Ondra ho poznává, ale nikdo o návštěvě nevěděl.",
     "left": { "label": "Pustím je, je to přece táta.", "effect": { "safety": -15, "trust": 5, "energy": 10 } },
-    "right": { "label": "Pošlu ho na registraci nebo do infostanu, ať to proběhne oficiálně.", "effect": { "energy": -5 } },
-    "log": "I rodič má projít registrací. Areál chrání pásky a pravidla – jen tak vědí všichni, kdo je kde."
+    "right": { "label": "Pošlu ho na registraci, ať to proběhne oficiálně.", "effect": { "energy": -5 } },
+    "log": "Každý nový člověk v areálu – i rodič – jde vždy přes registraci. Jen tak všichni vědí, kdo je kde."
   },
   {
     "id": "coughing-zuzka",
@@ -945,7 +945,7 @@
     "topic": "adult-misconduct",
     "character": "Kuba (kolega z posádky)",
     "text": "Všimneš si, že si Kuba večer píše s Myškou (16) a posílá jí srdíčka a „ty jsi tu nejhezčí“.",
-    "left": { "label": "Řeknu mu to rovnou, ať přestane. Jestli ne, jdu za Jindřichem do Uší pro duši.", "effect": { "crew": -10 } },
+    "left": { "label": "Řeknu mu to rovnou, ať přestane. Jestli ne, jdu do Uší pro duši.", "effect": { "crew": -10 } },
     "right": { "label": "Je to jen srdíčko, nebudu z toho dělat aféru.", "effect": { "safety": -25, "crew": 15, "energy": 5 }, "set": ["ignored-kuba-messages"] },
     "log": "Vedoucí a šestnáctiletá z jeho posádky nejsou dva kamarádi. Ozvi se i u kolegy, kterého máš rád nebo ráda."
   },
@@ -1070,7 +1070,7 @@
     "character": "Myška (16)",
     "requires": ["ignored-kuba-messages"],
     "text": "Myška ti ráno ukáže telefon. Kuba jí v noci psal, ať za ním přijde ke stanu.",
-    "left": { "label": "Půjdeme spolu hned za Jindřichem do Uší pro duši a za SOS.", "effect": { "crew": -10, "trust": 5 } },
+    "left": { "label": "Půjdeme spolu hned do Uší pro duši a za SOS.", "effect": { "crew": -10, "trust": 5 } },
     "right": { "label": "Řeknu Kubovi, ať to smaže, a necháme to být.", "effect": { "safety": -30, "crew": 15 } },
     "log": "Tohle už není srdíčko. Nevyšetřuj a neřeš to „mezi sebou“ – předej to Ušim pro duši a SOS."
   },
@@ -1172,10 +1172,10 @@
     "required": true,
     "topic": "one-on-one",
     "character": "Zuzka (10)",
-    "text": "Na nádraží v Praze rodiče vyzvedávají děti. Zuzčina máma volá, že dorazí až za hodinu. Kuba už musí jít.",
-    "left": { "label": "Počkám se Zuzkou na lavičce v hale, mezi lidmi, a napíšu to mámě i do chatu posádky.", "effect": { "energy": -5 } },
+    "text": "Na nádraží v Praze si rodiče vyzvedávají děti. Zuzčina máma volá, že se jí porouchalo auto a nedorazí.",
+    "left": { "label": "Domluvím s mámou, kdo Zuzku vyzvedne místo ní, a do té doby čekáme s dalším vedoucím v hale.", "effect": { "energy": -10, "crew": 5 } },
     "right": { "label": "Vezmu ji k sobě domů, máma si ji vyzvedne tam.", "effect": { "safety": -20, "trust": 10 } },
-    "log": "Čekání jeden na jednoho jde – na veřejném místě a s vědomím rodičů. Odvézt dítě k sobě domů bez dohody ne."
+    "log": "Dítě předáváš jen rodiči nebo tomu, koho rodič určí. Když rodič nedorazí, musí vedoucí sehnat, kdo dítě odvede – a do té doby nezůstávat s dítětem o samotě v soukromí."
   },
   {
     "id": "train-video",
@@ -1212,7 +1212,7 @@
     "text": "Bára sedí ve vlaku u okna a tiše řekne: „Nechci domů.“",
     "left": { "label": "Sednu si k ní a zeptám se, co se doma děje.", "effect": { "trust": 5, "energy": -5 } },
     "right": { "label": "„Každého to po akci mrzí, za rok zas!“", "effect": { "trust": -15, "energy": 10 } },
-    "log": "„Nechci domů“ může být smutek po akci, ale i signál. Poslouchej; po akci pomůže Linka bezpečí 116 111 nebo Uši pro duši."
+    "log": "„Nechci domů“ může být smutek po akci, ale i signál. Poslouchej a nezlehčuj. Po akci pomůže skautská krizová linka nebo Uši pro duši."
   },
   {
     "id": "sleeping-kuba",
@@ -1270,10 +1270,10 @@
     "slot": "night",
     "required": false,
     "topic": "where-to-turn",
-    "character": "Jindřich (Uši pro duši)",
+    "character": "Doma po akci",
     "text": "Některé situace z akce se ti pořád vracejí a nemůžeš usnout.",
-    "left": { "label": "Napíšu Jindřichovi – říkal, že se můžeme ozvat i po akci.", "effect": { "energy": 5 } },
+    "left": { "label": "Ozvu se Ušim pro duši – fungují pro celý Junák, nejen na akcích.", "effect": { "energy": 5 } },
     "right": { "label": "To přejde, nebudu nikoho otravovat.", "effect": { "energy": -15, "trust": -5 } },
-    "log": "Těžké věci z akce si nemusíš nést sám ani sama. Ozvat se je v pořádku i po akci."
+    "log": "Těžké věci z akce si nemusíš nést sám ani sama. Uši pro duši jsou standardní služba pro celý Junák, ozvat se jde i po akci."
   }
 ]

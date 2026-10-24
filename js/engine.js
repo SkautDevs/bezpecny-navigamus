@@ -17,6 +17,7 @@ export function newState() {
     flags: [],
     seen: [], // ids of cards ever played (all days, all attempts)
     checkpoint: null, // snapshot taken at the start of the current day
+    perfect: true, // no fall and the intended choice on every card -> secret ending
   };
 }
 
@@ -24,8 +25,10 @@ export function snapshot(state) {
   return { day: state.day, meters: { ...state.meters }, flags: [...state.flags] };
 }
 
+// Retrying after a fall; a fall also rules out the secret ending.
 export function restoreCheckpoint(state) {
   const cp = state.checkpoint;
+  state.perfect = false;
   state.day = cp.day;
   state.flags = [...cp.flags];
   for (const m of METERS) {
@@ -55,7 +58,9 @@ export function drawSlot(cards, day, slot, flags, usedToday, rng = Math.random) 
   return shuffle([...fixed, ...fill], rng);
 }
 
-export function applyChoice(state, choice) {
+export function applyChoice(state, card, side) {
+  const choice = card[side];
+  if (['left', 'right'].includes(card.intended) && card.intended !== side) state.perfect = false;
   for (const [meter, delta] of Object.entries(choice.effect || {})) {
     state.meters[meter] = clamp(state.meters[meter] + delta, 0, 100);
   }
@@ -73,9 +78,10 @@ export function checkFall(meters) {
   return null;
 }
 
-export function goodEndingId(meters) {
-  const inside = METERS.every((m) => meters[m] >= GOOD_RANGE[0] && meters[m] <= GOOD_RANGE[1]);
-  return inside ? 'safe-harbor' : 'scarred-harbor';
+export function goodEndingId(state) {
+  const inside = METERS.every((m) => state.meters[m] >= GOOD_RANGE[0] && state.meters[m] <= GOOD_RANGE[1]);
+  if (!inside) return 'scarred-harbor';
+  return state.perfect ? 'helmsman' : 'safe-harbor';
 }
 
 export function fallEndingId(fall) {
@@ -111,7 +117,7 @@ export function simulate(cards, policy, rng = Math.random, maxRetries = 20) {
       for (const card of drawSlot(cards, state.day, slot, state.flags, usedToday, rng)) {
         usedToday.push(card.id);
         played.add(card.id);
-        applyChoice(state, card[policy(card, state, rng)]);
+        applyChoice(state, card, policy(card, state, rng));
         fell = checkFall(state.meters);
         if (fell) break;
       }
@@ -125,5 +131,5 @@ export function simulate(cards, policy, rng = Math.random, maxRetries = 20) {
     if (state.day < 4) startNextDay(state);
     else state.day++;
   }
-  return { ending: goodEndingId(state.meters), falls, played };
+  return { ending: goodEndingId(state), falls, played };
 }

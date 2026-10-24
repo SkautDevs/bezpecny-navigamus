@@ -175,7 +175,7 @@ function choose(shownSide) {
   const card = $('card');
   card.classList.add('leaving');
   card.style.transform = `translateX(${shownSide === 'left' ? -150 : 150}%) rotate(${shownSide === 'left' ? -20 : 20}deg)`;
-  applyChoice(state, current[side]);
+  applyChoice(state, current, side);
   if (!state.seen.includes(current.id)) state.seen.push(current.id);
   dayLog.push({ card: current, side });
   previewEffect(null);
@@ -211,7 +211,7 @@ function afterLog() {
     startNextDay(state);
     startDay();
   } else {
-    showEnding(goodEndingId(state.meters));
+    showEnding(goodEndingId(state));
   }
 }
 

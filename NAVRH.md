@@ -57,8 +57,9 @@ Pády (0): Ztroskotání (Bezpečí), Zavřené dveře (Důvěra), Osamělý maj
 Vyhoření (Síly).
 Pády (100): Kapitán Bligh (Bezpečí), Nejlepší kámoš (Důvěra), Jeden z party
 (Parta), Prospaný Navigamus (Síly).
-Dobré: Bezpečný přístav (vše ve středu), Přístav s šrámy (něco na hraně),
-volitelně tajný konec.
+Dobré: Bezpečný přístav (vše ve středu), Přístav s šrámy (něco na hraně).
+Tajný: Kormidelník – bez jediného pádu, na všech kartách přiměřená
+volba (`intended`) a ukazatele ve středu. Hra tedy `intended` čte i pro tento konec.
 
 ## Témata
 
@@ -132,8 +133,8 @@ Code, JSON keys and comments in English; player-facing texts in Czech.
 - Optional on a choice: `"set": ["flag"]`, `"logChoice": "…"` (text do deníku pro tuto volbu).
 - Optional on a card: `"requires": ["flag"]`, `"excludes": ["flag"]` (navazující karty),
   `"log"` (text do večerního deníku).
-- `intended`: `left | right | both | neither` – přiměřená volba; čte jen
-  `check.html` (simulace), hra ne. Hra strany náhodně prohazuje.
+- `intended`: `left | right | both | neither` – přiměřená volba; používá ji
+  simulace v `check.html` a tajný konec. Hra strany náhodně prohazuje.
 - `topic` values: `alcohol, one-on-one, boundaries, photos, bullying, confiding,
   adult-misconduct, where-to-turn, water, night-quiet, fire, stranger, smoking,
   self-care, code-of-conduct, respect`.

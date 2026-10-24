@@ -78,5 +78,13 @@
     "title": "Přístav s šrámy",
     "text": "Doplul nebo doplula jsi. Loď je trochu pocuchaná, ale celá.",
     "debrief": "Jeden z ukazatelů byl na konci blízko kraje. Zkus si rozmyslet, kde ses nechal nebo nechala strhnout – a co bys udělal nebo udělala jinak."
+  },
+  {
+    "id": "helmsman",
+    "kind": "good",
+    "icon": "🧭",
+    "title": "Kormidelník",
+    "text": "Čtyři dny bez jediného ztroskotání a v každé důležité chvíli správný kurz. Tajný konec je tvůj.",
+    "debrief": "Tohle se povede málokomu. Na skutečné akci se chybám nevyhne nikdo – ale víš, čeho si všímat, jak reagovat přiměřeně a kam se obrátit. Přesně takové lidi Navigamus potřebuje."
   }
 ]
