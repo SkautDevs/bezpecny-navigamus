@@ -45,19 +45,28 @@ kritickým myšlením“. Přehnat to na kteroukoli stranu je chyba.
 ## Pečeť (náhrada osvědčení)
 
 - Pečeť dostane hráč, který dojede do neděle a potkal všechny povinné karty.
-- Při pádu: obrazovka konce + rozbor (co se stalo, proč, kam se obrátit),
-  pak pokračování od začátku téhož dne (checkpoint).
+- Při pádu: obrazovka konce (co se na lodi stalo), blok **Co k tomu vedlo**
+  (2 volby z toho dne, které ukazatel nejvíc posunuly) a jedna věta
+  **Na Navigamu platí**; pak pokračování od začátku téhož dne (checkpoint).
+- Rámec je **trénink, ne test** (zpětná vazba testerů): intro to říká
+  výslovně, konce popisují události, ne typ člověka, a všechno, co hra hráči
+  vytkne, je přivázané ke konkrétní kartě.
+- Lodní deník označuje nezamýšlené volby (⚠️, červený okraj) – i bez komentáře.
 - Pečeť = osobní kód (varianta „na důvěru“). **Otevřené:** jak přesně a jak
   ho ověří registrace.
 - Galerie objevených konců motivuje hrát znovu.
 
 ## Konce
 
-Pády (0): Ztroskotání (Bezpečí), Zavřené dveře (Důvěra), Osamělý maják (Parta),
-Vyhoření (Síly).
-Pády (100): Kapitán Bligh (Bezpečí), Nejlepší kámoš (Důvěra), Jeden z party
+Názvy jsou události na lodi, ne archetypy osob (ty působily jako personality test).
+Pády (0): Ztroskotání (Bezpečí), Zavřené dveře (Důvěra), Nikdo se nepřidá (Parta),
+Bez spánku (Síly).
+Pády (100): Vzpoura posádky (Bezpečí), Bez hranic (Důvěra), Krytí party
 (Parta), Prospaný Navigamus (Síly).
-Dobré: Bezpečný přístav (vše ve středu), Přístav s šrámy (něco na hraně).
+Dobré: Bezpečný přístav (vše ve středu), Přístav s šrámy (něco na hraně) –
+ten vypíše konkrétně, který ukazatel a kterým směrem (`near` u pádového konce
+stejného směru), a „Co k tomu vedlo“ jen z nezamýšlených voleb; přiměřené
+volby, které stály Partu nebo Síly, se hráči nevyčítají.
 Tajný: Kormidelník – bez jediného pádu, na všech kartách přiměřená
 volba (`intended`) a ukazatele ve středu. Hra tedy `intended` čte i pro tento konec.
 

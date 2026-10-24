@@ -212,6 +212,18 @@ button:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
 .log p { margin: 0; }
 .log-choice { font-weight: bold; }
 .log-comment { color: var(--ink-soft); }
+.log-context { color: var(--ink-soft); font-size: 0.9rem; font-style: italic; }
+/* A choice the authors did not intend: the player should take a second look at it. */
+.log li.risky {
+  border-left: 3px solid var(--danger);
+  padding-left: 10px;
+  margin-left: -13px;
+}
+.log li.risky .log-choice { color: var(--danger); }
+
+.near { white-space: pre-line; }
+.causes { margin: 1.2em 0; }
+.causes .kicker { margin-bottom: 0.6em; }
 
 .ending-icon { font-size: 3rem; text-align: center; margin: 0; }
 #screen-ending .kicker, #screen-ending h2 { text-align: center; }

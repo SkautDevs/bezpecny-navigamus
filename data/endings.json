@@ -5,63 +5,71 @@
     "icon": "🛡️",
     "title": "Ztroskotání",
     "text": "Signálů bylo víc. Každý zvlášť vypadal jako maličkost, a tak se nikdo neozval. Až bylo pozdě.",
-    "debrief": "Bezpečí na akci nestojí na jednom velkém zásahu, ale na spoustě malých „všimnu si a ozvu se“. Nemusíš nic řešit sám ani sama: stačí to předat SOS, Ušim pro duši nebo SZT."
+    "debrief": "Bezpečí stojí na spoustě malých „všimnu si a řeknu to dál“. Nemusíš nic řešit sám ani sama – stačí to předat SOS, Uším pro duši nebo SZT.",
+    "near": "🛡️ Bezpečí bylo na konci skoro na dně – několik signálů zůstalo bez odezvy."
   },
   {
     "id": "safety-100",
     "kind": "fall",
     "icon": "🛡️",
-    "title": "Kapitán Bligh",
-    "text": "Každý přestupek hlášen, každá kytara po desáté zabavena. Pořádek dokonalý – a posádka u tebe vzbouřená.",
-    "debrief": "Bezpečí není totéž co kontrola. Kdo hlídá všechno, tomu se lidi přestanou svěřovat, a pak se o tom podstatném nedozví. Přiměřená reakce je silnější než ta nejpřísnější."
+    "title": "Vzpoura posádky",
+    "text": "Každý přestupek hlášen, každá kytara po desáté zabavena. Pořádek dokonalý – a posádka se za tebou přestala otáčet.",
+    "debrief": "Bezpečí není totéž co kontrola. Přiměřená reakce je silnější než ta nejpřísnější – lidé se pak svěří i s tím podstatným.",
+    "near": "🛡️ Bezpečí přetékalo – reakce byly často přísnější, než situace potřebovala."
   },
   {
     "id": "trust-0",
     "kind": "fall",
     "icon": "🤝",
     "title": "Zavřené dveře",
-    "text": "Něco se dělo. Ty ses to ale nedozvěděl ani nedozvěděla, protože za tebou nikdo nepřišel.",
-    "debrief": "Lidé se svěřují tomu, kdo poslouchá a nesoudí. Když s problémem někdo přijde, nejdřív vyslechni, nezlehčuj a neslibuj mlčení. Pak hledejte pomoc společně – třeba u Uší pro duši."
+    "text": "Něco se dělo. Nikdo s tím ale nepřišel, a tak ses to nedozvěděl ani nedozvěděla.",
+    "debrief": "Když někdo přijde s problémem, nejdřív vyslechni, nezlehčuj a neslibuj mlčení. Pomoc pak hledejte společně, třeba u Uší pro duši.",
+    "near": "🤝 Důvěra byla skoro na dně – několikrát se někdo setkal se zlehčením místo vyslechnutí."
   },
   {
     "id": "trust-100",
     "kind": "fall",
     "icon": "🤝",
-    "title": "Nejlepší kámoš",
-    "text": "Všichni ti všechno říkají, s každým jsi za jedno. Jenže když bylo potřeba udělat nepopulární krok, už to nešlo.",
-    "debrief": "Blízkost je dobrá, ale dospělý na akci má i odpovědnost. Kodex jednání dospělých říká, kde jsou hranice – a právě ty dělají z tebe člověka, který může opravdu pomoct."
+    "title": "Bez hranic",
+    "text": "Všichni ti všechno říkají, s každým jsi za jedno. Když ale bylo potřeba udělat nepopulární krok, už to nešlo.",
+    "debrief": "Dospělý na akci má i odpovědnost. Kodex jednání dospělých říká, kde jsou hranice – a právě ty umožňují opravdu pomoct.",
+    "near": "🤝 Důvěra přetékala – hranice mezi kamarádem a dospělým s odpovědností se několikrát rozmazala."
   },
   {
     "id": "crew-0",
     "kind": "fall",
     "icon": "👥",
-    "title": "Osamělý maják",
-    "text": "Svítíš na každou chybu ostatních. Lodě se ti teď vyhýbají a s tebou už nikdo nemluví.",
-    "debrief": "Upozornit na problém jde i bez kázání. Věcně, v klidu a s respektem – a když to nejde, předat to SOS. Vztahy s ostatními nejsou slabost, jsou to oči a uši, které na akci potřebuješ."
+    "title": "Nikdo se nepřidá",
+    "text": "Na každou chybu přišla výtka. Když bylo potřeba pomoct, nikdo se nepřidal.",
+    "debrief": "Na problém jde upozornit věcně, v klidu a s respektem – a když to nejde, předat ho SOS. Ostatní jsou oči a uši, které na akci potřebuješ.",
+    "near": "👥 Parta byla skoro na dně – výtek bylo víc než domluvy."
   },
   {
     "id": "crew-100",
     "kind": "fall",
     "icon": "👥",
-    "title": "Jeden z party",
-    "text": "Patříš do party a parta drží spolu. I když to, co kryješ, už dávno není legrace.",
-    "debrief": "Loajalita ke kamarádům nesmí být nad bezpečím ostatních. Ozvat se, když kamarád překračuje hranice, není zrada. Je to přesně to, co by od tebe chtěl někdo, komu se tím ubližuje."
+    "title": "Krytí party",
+    "text": "Parta drží spolu. I když to, co se krylo, už dávno nebyla legrace.",
+    "debrief": "Loajalita ke kamarádům nesmí být nad bezpečím ostatních. Ozvat se, když kamarád překračuje hranice, není zrada.",
+    "near": "👥 Parta přetékala – několikrát dostala přednost před tím, co bylo potřeba říct nahlas."
   },
   {
     "id": "energy-0",
     "kind": "fall",
     "icon": "🔋",
-    "title": "Vyhoření",
-    "text": "Čtvrtá ráno, třetí energy drink, nulový spánek. A pak chyba, kterou bys normálně neudělal ani neudělala.",
-    "debrief": "Starat se o sebe je taky odpovědnost. Unavený člověk přehlédne, co by jinak viděl. Odpočinek si dovol – a když už nemůžeš, Uši pro duši a SZT jsou tu i pro tebe."
+    "title": "Bez spánku",
+    "text": "Čtvrtá ráno, třetí energy drink, nulový spánek. A pak chyba, která by se odpočatému nestala.",
+    "debrief": "Starat se o sebe je taky odpovědnost: unavený člověk přehlédne, co by jinak viděl. Uši pro duši a SZT jsou tu i pro tebe.",
+    "near": "🔋 Síly byly skoro na dně – odpočinek šel několikrát stranou."
   },
   {
     "id": "energy-100",
     "kind": "fall",
     "icon": "🔋",
     "title": "Prospaný Navigamus",
-    "text": "Odpočatý, v pohodě, bez jediného konfliktu. Taky proto, že ses do ničeho nezapojil ani nezapojila.",
-    "debrief": "Nevšímat si je pohodlné. Jenže akce je bezpečná jen tehdy, když se dívají všichni. Nemusíš být hrdina – stačí si všimnout a říct to dál."
+    "text": "Odpočinek, klid, bez jediného konfliktu. Taky proto, že se nic neřešilo.",
+    "debrief": "Akce je bezpečná jen tehdy, když se dívají všichni. Nemusíš být hrdina – stačí si všimnout a říct to dál.",
+    "near": "🔋 Síly přetékaly – několik situací zůstalo bez zapojení."
   },
   {
     "id": "safe-harbor",
@@ -69,7 +77,7 @@
     "icon": "⚓",
     "title": "Bezpečný přístav",
     "text": "Čtyři dny, dva tisíce lidí a ty jsi u toho byl nebo byla – s otevřenýma očima, s respektem a s rozumem.",
-    "debrief": "Takhle vypadá dobrá akce: všímat si, reagovat přiměřeně, vědět kam se obrátit a nezapomenout na sebe. Uvidíme se na Hlučínském jezeře!"
+    "debrief": "Všímat si, reagovat přiměřeně, vědět kam se obrátit a nezapomenout na sebe. Uvidíme se na Hlučínském jezeře!"
   },
   {
     "id": "scarred-harbor",
@@ -77,7 +85,7 @@
     "icon": "⚓",
     "title": "Přístav s šrámy",
     "text": "Doplul nebo doplula jsi. Loď je trochu pocuchaná, ale celá.",
-    "debrief": "Jeden z ukazatelů byl na konci blízko kraje. Zkus si rozmyslet, kde ses nechal nebo nechala strhnout – a co bys udělal nebo udělala jinak."
+    "debrief": "Všímat si, reagovat přiměřeně, vědět kam se obrátit a nezapomenout na sebe. Na skutečné akci si pohlídej hlavně to, co bylo blízko kraje."
   },
   {
     "id": "helmsman",
@@ -85,6 +93,6 @@
     "icon": "🧭",
     "title": "Kormidelník",
     "text": "Čtyři dny bez jediného ztroskotání a v každé důležité chvíli správný kurz. Tajný konec je tvůj.",
-    "debrief": "Tohle se povede málokomu. Na skutečné akci se chybám nevyhne nikdo – ale víš, čeho si všímat, jak reagovat přiměřeně a kam se obrátit. Přesně takové lidi Navigamus potřebuje."
+    "debrief": "Na skutečné akci se chybám nevyhne nikdo – ale víš, čeho si všímat, jak reagovat přiměřeně a kam se obrátit. Přesně takové lidi Navigamus potřebuje."
   }
 ]

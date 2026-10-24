@@ -60,7 +60,9 @@ function validate(cards, endings) {
 
   const endingIds = new Set(endings.map((e) => e.id));
   for (const m of METERS) for (const edge of [0, 100]) {
-    if (!endingIds.has(`${m}-${edge}`)) errors.push(`chybí konec ${m}-${edge}`);
+    const e = endings.find((x) => x.id === `${m}-${edge}`);
+    if (!e) errors.push(`chybí konec ${m}-${edge}`);
+    else if (!e.near) errors.push(`konec ${m}-${edge}: chybí věta „near“ pro Přístav s šrámy`);
   }
   return { errors, warnings };
 }

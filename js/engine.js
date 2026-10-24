@@ -16,13 +16,14 @@ export function newState() {
     meters: Object.fromEntries(METERS.map((m) => [m, START_VALUE])),
     flags: [],
     seen: [], // ids of cards ever played (all days, all attempts)
+    history: [], // { id, side, day } of the choices that count (retried days are dropped)
     checkpoint: null, // snapshot taken at the start of the current day
     perfect: true, // no fall and the intended choice on every card -> secret ending
   };
 }
 
 export function snapshot(state) {
-  return { day: state.day, meters: { ...state.meters }, flags: [...state.flags] };
+  return { day: state.day, meters: { ...state.meters }, flags: [...state.flags], history: [...state.history] };
 }
 
 // Retrying after a fall; a fall also rules out the secret ending.
@@ -31,6 +32,7 @@ export function restoreCheckpoint(state) {
   state.perfect = false;
   state.day = cp.day;
   state.flags = [...cp.flags];
+  state.history = [...(cp.history || [])];
   for (const m of METERS) {
     state.meters[m] = clamp(cp.meters[m], RESTART_RANGE[0], RESTART_RANGE[1]);
   }
@@ -60,13 +62,35 @@ export function drawSlot(cards, day, slot, flags, usedToday, rng = Math.random) 
 
 export function applyChoice(state, card, side) {
   const choice = card[side];
-  if (['left', 'right'].includes(card.intended) && card.intended !== side) state.perfect = false;
+  if (isRisky(card, side)) state.perfect = false;
   for (const [meter, delta] of Object.entries(choice.effect || {})) {
     state.meters[meter] = clamp(state.meters[meter] + delta, 0, 100);
   }
   for (const f of choice.set || []) {
     if (!state.flags.includes(f)) state.flags.push(f);
   }
+  state.history.push({ id: card.id, side, day: state.day });
+}
+
+// True when the card has an intended side and the player picked the other one.
+export function isRisky(card, side) {
+  return ['left', 'right'].includes(card.intended) && card.intended !== side;
+}
+
+// The choices that pushed `meter` furthest towards `edge` (0 or 100), strongest first.
+// `onlyRisky` leaves out intended choices: appropriate steps cost crew or energy by design,
+// and listing them as "what led to this" would teach the opposite of what the card meant.
+export function topCauses(history, cards, meter, edge, { n = 2, onlyRisky = false } = {}) {
+  const byId = new Map(cards.map((c) => [c.id, c]));
+  return history
+    .map((h) => {
+      const card = byId.get(h.id);
+      const delta = ((card?.[h.side].effect || {})[meter] || 0) * (edge === 0 ? -1 : 1);
+      return { card, side: h.side, delta };
+    })
+    .filter((x) => x.card && x.delta > 0 && !(onlyRisky && !isRisky(x.card, x.side)))
+    .sort((a, b) => b.delta - a.delta)
+    .slice(0, n);
 }
 
 // Returns { meter, edge } for the first meter at 0 or 100, otherwise null.

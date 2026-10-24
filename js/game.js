@@ -1,7 +1,7 @@
 // Game UI: screens, swipe handling, persistence. Rules live in engine.js.
 import {
-  METERS, SLOTS, newState, snapshot, restoreCheckpoint, drawSlot,
-  applyChoice, checkFall, fallEndingId, goodEndingId, startNextDay,
+  METERS, SLOTS, GOOD_RANGE, newState, snapshot, restoreCheckpoint, drawSlot,
+  applyChoice, checkFall, fallEndingId, goodEndingId, startNextDay, isRisky, topCauses,
 } from './engine.js';
 
 const DAY_NAMES = { 1: 'Čtvrtek', 2: 'Pátek', 3: 'Sobota', 4: 'Neděle' };
@@ -190,12 +190,9 @@ function showLog() {
   list.replaceChildren();
   for (const { card, side } of dayLog) {
     const comment = (card[side].logChoice) || card.log;
-    if (!comment) continue;
-    const li = document.createElement('li');
-    li.innerHTML = '<p class="log-choice"></p><p class="log-comment"></p>';
-    li.querySelector('.log-choice').textContent = `${card.character ? card.character + ': ' : ''}${card[side].label}`;
-    li.querySelector('.log-comment').textContent = comment;
-    list.append(li);
+    // Risky choices are listed even without a comment, so the player sees where to take a second look.
+    if (!comment && !isRisky(card, side)) continue;
+    list.append(logItem(card, side, comment, false));
   }
   if (!list.children.length) {
     const li = document.createElement('li');
@@ -204,6 +201,61 @@ function showLog() {
   }
   $('btn-log-next').textContent = state.day < 4 ? `Pokračovat na ${DAY_NAMES_ACC[state.day + 1]}` : 'Doplout do přístavu';
   show('log');
+}
+
+// One entry of the daily log or of the "what led to this" block on an ending.
+function logItem(card, side, comment, withContext) {
+  const li = document.createElement('li');
+  const risky = isRisky(card, side);
+  li.classList.toggle('risky', risky);
+  if (withContext) {
+    const ctx = document.createElement('p');
+    ctx.className = 'log-context';
+    ctx.textContent = card.text;
+    li.append(ctx);
+  }
+  const choice = document.createElement('p');
+  choice.className = 'log-choice';
+  choice.textContent = `${risky ? '⚠️ ' : ''}${card.character ? card.character + ': ' : ''}${card[side].label}`;
+  li.append(choice);
+  if (comment) {
+    const p = document.createElement('p');
+    p.className = 'log-comment';
+    p.textContent = comment;
+    li.append(p);
+  }
+  return li;
+}
+
+// Fills the "Co k tomu vedlo" block with the choices that pushed `meter` towards `edge`.
+function renderCauses(history, meter, edge, onlyRisky = false) {
+  const list = $('causes-list');
+  list.replaceChildren();
+  const causes = topCauses(history, cards, meter, edge, { onlyRisky });
+  for (const { card, side } of causes) {
+    list.append(logItem(card, side, card[side].logChoice || card.log, true));
+  }
+  $('ending-causes').hidden = !causes.length;
+  return causes.length;
+}
+
+// Sentence for a meter that ended near an edge. The authored `near` text names a mistake,
+// so it is used only when a risky choice actually pushed the meter there.
+function nearSentence({ meter, edge }, blamed) {
+  if (blamed) return endings.find((y) => y.id === `${meter}-${edge}`).near;
+  return `${METER_ICONS[meter]} ${METER_NAMES[meter]}: na konci blízko kraje (${state.meters[meter]}) – spíš cena za správné kroky než chyba.`;
+}
+
+// Meters outside GOOD_RANGE at the end, worst first, as { meter, edge, distance }.
+function nearEdges() {
+  return METERS
+    .map((m) => {
+      const v = state.meters[m];
+      const edge = v < 50 ? 0 : 100;
+      return { meter: m, edge, distance: Math.abs(v - edge) };
+    })
+    .filter((x) => state.meters[x.meter] < GOOD_RANGE[0] || state.meters[x.meter] > GOOD_RANGE[1])
+    .sort((a, b) => a.distance - b.distance);
 }
 
 function afterLog() {
@@ -219,10 +271,24 @@ function showEnding(id) {
   const e = endings.find((x) => x.id === id);
   markEndingFound(id);
   $('ending-icon').textContent = e.icon;
-  $('ending-kicker').textContent = e.kind === 'fall' ? `Konec · ${DAY_NAMES[state.day]}` : 'Konec plavby';
+  $('ending-kicker').textContent = e.kind === 'fall' ? `Pád · ${DAY_NAMES[state.day]}` : 'Konec plavby';
   $('ending-title').textContent = e.title;
   $('ending-text').textContent = e.text;
   $('ending-debrief').textContent = e.debrief;
+  const near = $('ending-near');
+  near.hidden = true;
+  $('ending-causes').hidden = true;
+  if (e.kind === 'fall') {
+    const [meter, edge] = id.split('-');
+    renderCauses(state.history.filter((h) => h.day === state.day), meter, Number(edge));
+  } else if (id === 'scarred-harbor') {
+    const edges = nearEdges();
+    const blamed = new Set(edges.filter((x) => topCauses(state.history, cards, x.meter, x.edge, { onlyRisky: true }).length).map((x) => x.meter));
+    near.textContent = edges.map((x) => nearSentence(x, blamed.has(x.meter))).join('\n');
+    near.hidden = !edges.length;
+    const worst = edges.find((x) => blamed.has(x.meter));
+    if (worst) renderCauses(state.history, worst.meter, worst.edge, true);
+  }
   const sealBox = $('seal');
   sealBox.hidden = e.kind !== 'good';
   if (e.kind === 'good') {
@@ -319,7 +385,7 @@ async function boot() {
   $('btn-new').onclick = () => { state = newState(); startDay(); };
   $('btn-continue').onclick = () => {
     // Resume exactly where the day started (no clamping, unlike a retry after a fall).
-    state = load(STORAGE_STATE, null);
+    state = { ...newState(), ...load(STORAGE_STATE, null) }; // newState() supplies fields older saves lack
     Object.assign(state, structuredClone(state.checkpoint));
     startDay();
   };
