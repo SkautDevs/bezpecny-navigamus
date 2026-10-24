@@ -108,16 +108,18 @@ button:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
 .meter.danger .fill { background: linear-gradient(#e27365, var(--danger)); }
 .meter .icon { position: relative; font-size: 1.5rem; }
 
+/* Fixed-size box below the gauge, scaled instead of resized, so the preview never shifts the layout. */
 .meter .dot {
-  width: 0; height: 0;
+  width: 15px; height: 15px;
   border-radius: 50%;
   background: var(--light);
-  transition: width 0.15s, height 0.15s;
-  margin: 4px 0;
+  transform: scale(0);
+  transition: transform 0.15s;
+  margin-top: 2px;
 }
-.meter .dot.s { width: 6px; height: 6px; }
-.meter .dot.m { width: 10px; height: 10px; }
-.meter .dot.l { width: 15px; height: 15px; }
+.meter .dot.s { transform: scale(0.4); }
+.meter .dot.m { transform: scale(0.66); }
+.meter .dot.l { transform: scale(1); }
 
 .when { text-align: center; margin: 6px 0 14px; }
 .when .day {

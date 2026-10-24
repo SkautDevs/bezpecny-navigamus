@@ -89,7 +89,7 @@ function renderMeters() {
       el.className = 'meter';
       el.dataset.meter = m;
       el.title = METER_NAMES[m];
-      el.innerHTML = `<span class="dot"></span><span class="gauge"><span class="fill"></span><span class="icon">${METER_ICONS[m]}</span></span>`;
+      el.innerHTML = `<span class="gauge"><span class="fill"></span><span class="icon">${METER_ICONS[m]}</span></span><span class="dot"></span>`;
       box.append(el);
     }
   }

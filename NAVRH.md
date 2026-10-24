@@ -78,7 +78,26 @@ kam se obrátit; bezpečnost u vody.
 Pravidla akce (z testu): noční klid; otevřený oheň; cizí osoba bez šátku/pásku;
 kouření nezletilých; péče o sebe a únava; Kodex jednání dospělých.
 Podpůrné služby jako opakující se postavy: Jindřich (Uši pro duši), Hanka (SOS),
-Martin (SZT), infostan, servis tým.
+Martin (SZT), Vendula (servis tým), infostan.
+Dospělí kolem hráče: Kuba (kolega z posádky, nedokonalý, ale slušný), Pepa
+(Albatros: pivo, selfie, cigareta, podání ruky), Radek (Albatros: opilé ráno,
+srdíčka Myšce – jediný „zlý“ dospělý vedle Ládi), Týna (Delfín, kamarádská
+sousedka), Láďa (stan a čtrnáctiletá).
+
+## Volby a dopady (revize po testování)
+
+- Žádná volba nesmí být karikatura. Přehnaná volba = reálné přeskočení kroku
+  („rovnou to předám SOS“, „pro jistotu je tam nepustím“), podceněná volba =
+  pohodlná racionalizace („není to moje posádka“, „řeknu to zítra“). Lži vůči
+  SOS a SZT zůstávají – jsou to skutečná dilemata loajality.
+- Obě volby krátké (do ~60 znaků), podobně dlouhé, konkrétní akce v 1. osobě.
+  Lekce patří do deníku, ne do tlačítka.
+- Tři patra dopadů špatné volby: vážné Safe from Harm (jednoznačné karty, jen
+  jedna přiměřená volba) 40–50; pravidla akce 15–25; komfort a drobnosti 5–10.
+  Přiměřená volba bezpečí/důvěru skoro nezvedá a něco stojí (Parta, Síly).
+- Simulace po revizi: hráč s přiměřenými volbami padá ~0,1× za hru, náhodný
+  hráč ~16× a půlka náhodných her se zasekne (to je v pořádku, je to jen
+  diagnostika); všech osm pádů potká náhodný hráč aspoň 100× za 2000 her.
 
 ## Pravidla Navigamu 2027 (pro texty karet)
 
