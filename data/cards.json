@@ -8,7 +8,7 @@
     "topic": "code-of-conduct",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba strká pravidla Navigamu do batohu: „Kodex, pravidla… jezdíme na akce roky, to známe nazpaměť.“",
-    "left": { "label": "„Máš pravdu, jdeme stavět stany.“", "effect": { "crew": 10, "safety": -15, "energy": 5 } },
+    "left": { "label": "Než postavíme jediný stan, přečtu posádce pravidla nahlas, odstavec po odstavci.", "effect": { "safety": 15, "crew": -5, "energy": -5, "trust": -10 }, "logChoice": "Pravidla je dobré znát, ale předčítání na sluníčku nikoho nic nenaučí. Stačí projít to podstatné." },
     "right": { "label": "„Projdeme je s posádkou. Každá akce má něco jinak.“", "effect": { "crew": -5 } },
     "log": "Kodex jednání dospělých nastavuje hranice vůči dětem, rodičům, ostatním dospělým, organizaci i sobě. Pravidla Navigamu stojí za přečtení i po dvacáté akci; když si nevíš rady, mrkni do handbooku nebo se zeptej v infostanu či kohokoli ze servis týmu."
   },
@@ -21,7 +21,7 @@
     "topic": "code-of-conduct",
     "character": "Bářina máma (telefon)",
     "text": "Volá Bářina máma: „Můžeš mi každý večer napsat, s kým Bára byla a co dělala? A poslat fotky?“",
-    "left": { "label": "Slíbím hlášení a fotky každý večer.", "effect": { "safety": 15, "trust": 10, "energy": -15 } },
+    "left": { "label": "Slíbím hlášení a fotky každý večer.", "effect": { "safety": 20, "trust": 10, "energy": -15 } },
     "right": { "label": "Vysvětlím, že se ozvu, kdyby se něco dělo, a že Bára může zavolat sama.", "effect": { "trust": 5 } }
   },
   {
@@ -46,7 +46,7 @@
     "topic": "water",
     "character": "Ondra (13)",
     "text": "„Jen kousek podél břehu, vesta mě škrtí!“ Ondra už stojí na paddleboardu po kotníky ve vodě.",
-    "left": { "label": "„Tak jo, ale fakt jen u břehu.“", "effect": { "safety": -25, "trust": 10 }, "set": ["no-vest"] },
+    "left": { "label": "„Tak jo, ale fakt jen u břehu.“", "effect": { "safety": -25, "trust": 10, "energy": 5 }, "set": ["no-vest"] },
     "right": { "label": "„Bez vesty na vodu ne. Povolíme ti ji, ať neškrtí.“", "effect": { "trust": -5 } },
     "log": "Na vodě je vesta povinná bez výjimek – i u břehu a i pro zkušené. Voda je místo, kde se z „jen kousek“ stane neštěstí nejrychleji."
   },
@@ -71,7 +71,7 @@
     "topic": "night-quiet",
     "character": "Parta s kytarou",
     "text": "Je čtvrt na dvanáct. Parta s kytarou kolem tebe prochází potřetí a zpívá čím dál hlasitěji. Je vidět, že je to fakt baví.",
-    "left": { "label": "Vyběhnu ze stanu, seřvu je, že kvůli nim nikdo nespí, a jdu je nahlásit SOS.", "effect": { "safety": 20, "crew": -20 }, "logChoice": "Noční klid platí, ale hned křičet a hlásit je zbytečně tvrdé. Stačí je v klidu poprosit; SOS přijde na řadu, až když to nepomůže.", "set": ["yelled-guitar"] },
+    "left": { "label": "Vyběhnu ze stanu, seřvu je, že kvůli nim nikdo nespí, a jdu je nahlásit SOS.", "effect": { "safety": 20, "crew": -5, "trust": -10 }, "logChoice": "Noční klid platí, ale hned křičet a hlásit je zbytečně tvrdé. Stačí je v klidu poprosit; SOS přijde na řadu, až když to nepomůže.", "set": ["yelled-guitar"] },
     "right": { "label": "Poprosím je, ať skončí – od deseti je noční klid. Kdyby to nešlo, řekne jim to SOS.", "effect": { "crew": -5 } },
     "log": "Noční klid od 22:00 platí pro všechny – ve stanech spí děti i servis, který vstává v pět. Upozornit je můžeš sám nebo sama; když to nepomůže, je tu SOS."
   },
@@ -85,8 +85,8 @@
     "character": "Hanka (SOS)",
     "requires": ["ignored-stranger"],
     "text": "„Ahoj, hledáme člověka bez pásku, který včera fotil děti u mol. Nevybavuješ si někoho takového?“",
-    "left": { "label": "„Možná… ale nechci nikoho křivě obvinit.“", "effect": { "safety": -15, "crew": 5 } },
-    "right": { "label": "„Ano, šel včera odpoledne kolem stanů. Ukážu ti kudy.“", "effect": { "energy": -5 } },
+    "left": { "label": "„Možná… ale nechci nikoho křivě obvinit.“", "effect": { "safety": -15, "crew": 5, "energy": 5 } },
+    "right": { "label": "„Ano, šel včera odpoledne kolem stanů. Ukážu ti kudy.“", "effect": {  } },
     "log": "Když něco oznámíš, nikoho neobviňuješ. Dáváš SOS informaci, se kterou umí naložit."
   },
   {
@@ -138,7 +138,7 @@
     "topic": "photos",
     "character": "Tvůj telefon",
     "text": "Fotíš skoky do vody. Jedna fotka je famózní – tři kluci z cizí posádky v plavkách ve vzduchu, s výrazy jako z komiksu. Na sítích by to byl hit.",
-    "left": { "label": "Nahraju ji, vždyť je to vtipné.", "effect": { "crew": 10, "safety": -20 } },
+    "left": { "label": "Nahraju ji, vždyť je to vtipné.", "effect": { "crew": 15, "safety": -20 } },
     "right": { "label": "Pošlu ji jejich vedoucímu a na sítě ji nedám.", "effect": { "crew": 5 } },
     "log": "Fotit se na Navigamu smí. Zveřejňovat ale jen se souhlasem a nikdy citlivé situace: plavky, převlékání, spaní, pláč, zranění. Když se někdo ohradí, respektuj to."
   },
@@ -151,7 +151,7 @@
     "topic": "where-to-turn",
     "character": "Kluk z cizí posádky",
     "text": "Na stanovištích je frmol. Cestou na latrínu si všimneš kluka, který místo programu sedí stranou s hlavou v dlaních.",
-    "left": { "label": "Hned pro něj volám SZT i Uši pro duši a nepustím ho z očí.", "effect": { "trust": 20, "safety": 10, "crew": -5, "energy": -15 }, "logChoice": "Nabídnout pomoc je dobře, ale nejdřív se zeptej. Ne každý, kdo sedí stranou, je v krizi." },
+    "left": { "label": "Hned pro něj volám SZT i Uši pro duši a nepustím ho z očí.", "effect": { "trust": 20, "safety": 15, "crew": -5, "energy": -15 }, "logChoice": "Nabídnout pomoc je dobře, ale nejdřív se zeptej. Ne každý, kdo sedí stranou, je v krizi." },
     "right": { "label": "Zeptám se, jestli něco nepotřebuje, a nabídnu SZT nebo Uši pro duši.", "effect": { "trust": 5, "energy": -5 } },
     "log": "Na akci jsou tři místa, kam můžeš poslat kohokoli – i sebe: SZT kvůli zdraví, Uši pro duši, když je těžko na duši, SOS kvůli bezpečí. Kdo neví, kam jít, zeptá se v infostanu nebo kohokoli ze servis týmu."
   },
@@ -164,7 +164,7 @@
     "topic": "where-to-turn",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba kulhá, kotník jako meloun. „SZT? Tam se chodí, až když umíráš. Dám si led z chladicího boxu a bude to.“",
-    "left": { "label": "„Jak chceš, jsi dospělý.“", "effect": { "crew": 5, "safety": -10 } },
+    "left": { "label": "Zavolám SZT s nosítky, ať ho hned odvezou.", "effect": { "safety": 15, "crew": -10, "energy": -5 }, "logChoice": "SZT je správná adresa, ale s vyvrtnutým kotníkem se tam dá dojít. Doprovod stačí." },
     "right": { "label": "„Doprovodím tě tam. Od toho tam jsou.“", "effect": { "crew": 5, "energy": -5 } }
   },
   {
@@ -176,7 +176,7 @@
     "topic": "smoking",
     "character": "Myška a Beruška (16)",
     "text": "Cestou do stanu vidíš Myšku a Berušku – oběma je šestnáct. Krčí se za stanem, jedna s IQOSem, druhá s cigaretou.",
-    "left": { "label": "Hned volám SOS, ať je vyloučí z akce.", "effect": { "safety": 20, "trust": -15, "crew": -15 }, "logChoice": "Vyloučení není první krok. Pravidla platí, ale řeší se přes jejich vedoucího posádky." },
+    "left": { "label": "Hned volám SOS, ať je vyloučí z akce.", "effect": { "safety": 20, "trust": -20, "crew": -5 }, "logChoice": "Vyloučení není první krok. Pravidla platí, ale řeší se přes jejich vedoucího posádky." },
     "right": { "label": "Dojdu za nimi, v klidu řeknu, že tady kouřit nesmí, a dám vědět jejich vedoucímu posádky.", "effect": { "crew": 5, "energy": -5 } },
     "log": "Kouřit se smí jen na vyhrazených místech a jen tomu, komu to dovoluje zákon. U nezletilých to řeš přes jejich vedoucího posádky – vyloučení není první krok."
   },
@@ -202,7 +202,7 @@
     "topic": "alcohol",
     "character": "Pepa (vedoucí posádky Albatros)",
     "text": "Je po desáté. U vedlejších stanů sedí pár vedoucích a koluje plechovka piva. Pepa ti ji podává: „Dej si, děti spí, nikdo to neřeší.“",
-    "left": { "label": "Přisednu si, jednu dám.", "effect": { "crew": 15, "safety": -25 }, "set": ["drank-beer"] },
+    "left": { "label": "Přisednu si, jednu dám.", "effect": { "crew": 20, "safety": -25 }, "set": ["drank-beer"] },
     "right": { "label": "„Alkohol je tu zakázaný všem. Uklidíme to, nebo to řeknu SOS.“", "effect": { "crew": -5 }, "set": ["refused-beer"] },
     "log": "Na Navigamu je alkohol zakázaný všem, bez ohledu na věk a roli. Děti „spí“ jen do chvíle, kdy potřebují střízlivého dospělého."
   },
@@ -231,7 +231,7 @@
     "requires": ["refused-beer"],
     "text": "Pepa tě u snídaně přejde bez pozdravu. Od jeho posádky zaslechneš šeptání: „To je ten udavač.“",
     "left": { "label": "Zajdu za ním a v klidu vysvětlím, proč mi to nebylo jedno.", "effect": { "crew": 10, "energy": -5 }, "set": ["talked-pepa"] },
-    "right": { "label": "Nechám to být. Nejsem tu kvůli popularitě.", "effect": { "crew": -15, "safety": 10 } },
+    "right": { "label": "Nechám to být. Nejsem tu kvůli popularitě.", "effect": { "crew": -10, "safety": 15 } },
     "log": "Ozvat se něco stojí. Pomáhá vysvětlit proč, ne moralizovat."
   },
   {
@@ -269,7 +269,7 @@
     "topic": "boundaries",
     "character": "Tonda (17)",
     "text": "Už potřetí vidíš, jak Tonda dává holkám ruku kolem ramen nebo jim ji položí na koleno. Holky se tváří rozpačitě a brzy odcházejí.",
-    "left": { "label": "Holky jsou velké, ať si řeknou samy.", "effect": { "safety": -30, "trust": -10 } },
+    "left": { "label": "Holky jsou velké, ať si řeknou samy.", "effect": { "safety": -30, "trust": -10, "energy": 10 } },
     "right": { "label": "Promluvím s ním stranou, ať toho nechá. Když to nepomůže, jdu do Uší pro duši.", "effect": { "crew": -5 } },
     "log": "Kdo nemá odvahu říct „ne“, ještě nesouhlasí. Věcný rozhovor stranou je lepší než veřejné pranýřování; dál pomůžou Uši pro duši nebo SOS."
   },
@@ -296,7 +296,7 @@
     "topic": "fire",
     "character": "Posádka Albatros",
     "text": "Posádka Albatros se zvedá na koncert. U jejich stanů ale dál svítí retro petrolejka a pár svíček na dřevěném stole.",
-    "left": { "label": "Bez ptaní jim to zhasnu a ráno je nahlásím SOS.", "effect": { "safety": 20, "crew": -15 }, "logChoice": "Bezpečí jsi ohlídal, ale za jejich zády. Domluva je rychlejší a nikoho neponíží." },
+    "left": { "label": "Bez ptaní jim to zhasnu a ráno je nahlásím SOS.", "effect": { "safety": 25, "crew": -5, "trust": -10 }, "logChoice": "Bezpečí je ohlídané, ale za jejich zády. Domluva je rychlejší a nikoho neponíží." },
     "right": { "label": "Poprosím je, ať to před odchodem zhasnou.", "effect": { "crew": -5 } },
     "log": "Oheň je na Navigamu povolený jen pod dozorem. Stan shoří rychleji, než doběhneš z koncertu."
   },
@@ -310,7 +310,7 @@
     "character": "Bára (12)",
     "text": "Bára tě odchytí stranou, oči uplakané: „Můžu ti něco říct? Ale musíš slíbit, že to nikomu neřekneš. Týká se to jednoho vedoucího.“",
     "left": { "label": "„Slibuju, neboj. Zůstane to mezi námi.“", "effect": { "trust": 10, "safety": -30 }, "set": ["promised-silence"] },
-    "right": { "label": "„Tohle slíbit nemůžu, ale slíbím, že ti pomůžu. Poslouchám.“", "effect": { "energy": -5 }, "set": ["bara-helped"] },
+    "right": { "label": "„Tohle slíbit nemůžu, ale slíbím, že ti pomůžu. Poslouchám.“", "effect": { "safety": 5 }, "set": ["bara-helped"] },
     "log": "Mlčení nikdy neslibuj – možná budeš potřebovat pomoc. Poslouchej, nevyšetřuj, nezpochybňuj a co nejdřív to předej Ušim pro duši nebo SOS."
   },
   {
@@ -322,7 +322,7 @@
     "topic": "alcohol",
     "character": "Servisák z kuchyně",
     "text": "Kolem půlnoci potkáš servisáka, který se motá, mluví z cesty a tvrdí, že je mu jen trochu blbě.",
-    "left": { "label": "Dám najevo, co si o tom myslím, a vyvedu ho z areálu.", "effect": { "safety": 15, "trust": -15, "crew": -10 } },
+    "left": { "label": "Dám najevo, co si o tom myslím, a vyvedu ho z areálu.", "effect": { "safety": 20, "trust": -15, "crew": -5 } },
     "right": { "label": "Zůstanu u něj, zjistím, co mu je, a doprovodím ho na SZT.", "effect": { "energy": -5 } },
     "log": "Nevíš, jestli pil, nebo si špatně vzal léky. Nesoudíš – pomůžeš a předáš ho SZT; dodržování pravidel pak řeší SOS."
   },
@@ -336,7 +336,7 @@
     "character": "Láďa (vedoucí cizí posádky)",
     "text": "Ve tmě vidíš Láďu, vedoucího z cizí posádky, jak zve čtrnáctiletou holku z jiného tábořiště k sobě do stanu „na čaj, ať jí není zima“. Už podruhé.",
     "left": { "label": "Nebudu se plést do cizí posádky. Třeba to tak nemyslí.", "effect": { "safety": -35, "crew": 5 } },
-    "right": { "label": "Vstoupím do toho: „Pojď, doprovodím tě k tvým.“ A hned to oznámím SOS.", "effect": { "crew": -5, "energy": -5 } },
+    "right": { "label": "Vstoupím do toho: „Pojď, doprovodím tě k tvým.“ A hned to oznámím SOS.", "effect": { "crew": -5, "safety": 5 } },
     "log": "Nevhodné chování dospělého nemusíš dokazovat. Stačí, že ti něco nesedí: zakroč a oznam to SOS nebo Ušim pro duši – i když jde o kolegu."
   },
   {
@@ -401,7 +401,7 @@
     "character": "Matěj (11)",
     "text": "Na nádraží v Hlučíně Matěj zjistí, že mu batoh odjíždí ve vlaku. Vlak se právě rozjíždí.",
     "left": { "label": "Rozběhnu se podél vlaku a mávám na průvodčího.", "effect": { "safety": -10, "energy": -15, "trust": 5 } },
-    "right": { "label": "Zavolám na infolinku dráhy a zatím mu posádka půjčí, co potřebuje.", "effect": { "energy": -5 } }
+    "right": { "label": "Zavolám na infolinku dráhy a zatím mu posádka půjčí, co potřebuje.", "effect": {  } }
   },
   {
     "id": "band-on-ankle",
@@ -412,7 +412,7 @@
     "topic": "stranger",
     "character": "Kuba (kolega z posádky)",
     "text": "Na registraci rozdávají identifikační pásky. Kuba: „Pásek si dám až večer, škrtí mě u hodinek.“",
-    "left": { "label": "Bez pásku ho nepustím ani na snídani a nahlásím to SOS.", "effect": { "safety": 15, "crew": -15 }, "logChoice": "Pásek je povinný, ale na kolegu stačí připomínka, ne hlášení." },
+    "left": { "label": "Bez pásku ho nepustím ani na snídani a nahlásím to SOS.", "effect": { "safety": 20, "crew": -5, "trust": -10 }, "logChoice": "Pásek je povinný, ale na kolegu stačí připomínka, ne hlášení." },
     "right": { "label": "„Dej si ho na kotník, tam škrtit nebude. Děti to po nás opakujou.“", "effect": {  } }
   },
   {
@@ -437,7 +437,7 @@
     "topic": "water",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba chce postavit stan přímo na břehu: „Ráno skok rovnou ze spacáku do vody!“",
-    "left": { "label": "Super nápad, stavíme.", "effect": { "crew": 10, "safety": -15 } },
+    "left": { "label": "Stany přestěhuju na úplný konec areálu, co nejdál od vody.", "effect": { "safety": 15, "crew": -10, "energy": -5 }, "logChoice": "Určená místa jsou bezpečná dost. Stěhovat posádku přes celý areál je zbytečné." },
     "right": { "label": "Postavíme ho na určeném místě – k vodě je to dvacet kroků.", "effect": { "crew": -5 } }
   },
   {
@@ -475,7 +475,7 @@
     "topic": "photos",
     "character": "Pepa (vedoucí posádky Albatros)",
     "text": "Pepa fotí děti z tvé posádky na selfie pro instagram Albatrosu. Nikoho se neptal.",
-    "left": { "label": "Vezmu mu telefon a fotky hned smažu.", "effect": { "safety": 20, "crew": -15 }, "logChoice": "Ochránit děti je správně, ale brát kolegovi telefon ne. Stačí se zeptat a poprosit." },
+    "left": { "label": "Vezmu mu telefon a fotky hned smažu.", "effect": { "safety": 20, "crew": -5, "trust": -10 }, "logChoice": "Ochránit děti je správně, ale brát kolegovi telefon ne. Stačí se zeptat a poprosit." },
     "right": { "label": "Zeptám se, k čemu fotky jsou, a poprosím ho, ať je bez souhlasu nezveřejňuje.", "effect": {  } },
     "log": "Cizí děti se bez souhlasu nezveřejňují. Ozvat se je v pořádku i vůči kamarádovi."
   },
@@ -488,7 +488,7 @@
     "topic": "self-care",
     "character": "Zuzka (10)",
     "text": "První večeře: guláš, který vypadá jako mapa jezera. Zuzka, nejmladší z posádky, odmítá jíst.",
-    "left": { "label": "Musí sníst aspoň půlku, jinak nedostane buchtu.", "effect": { "safety": 10, "trust": -15 } },
+    "left": { "label": "Musí sníst aspoň půlku, jinak nedostane buchtu.", "effect": { "safety": 15, "trust": -15 } },
     "right": { "label": "Nechám ji, vezme si chleba a ráno uvidíme.", "effect": { "trust": 5 } }
   },
   {
@@ -500,7 +500,7 @@
     "topic": "fire",
     "character": "Ondra (13)",
     "text": "U ohniště ještě hoří oheň a hlídka odešla na večeři. Ondra se nabízí, že tam zůstane sám.",
-    "left": { "label": "Ondra to zvládne, je mu třináct.", "effect": { "safety": -15, "trust": 10 } },
+    "left": { "label": "Ondra to zvládne, je mu třináct.", "effect": { "safety": -15, "trust": 10, "energy": 10 } },
     "right": { "label": "Zůstanu tam s ním, dokud se hlídka nevrátí.", "effect": { "energy": -5 } },
     "log": "Oheň pod dozorem znamená pod dozorem dospělého nebo určené hlídky – ne dítěte, které zůstalo samo."
   },
@@ -513,7 +513,7 @@
     "topic": "night-quiet",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba vymyslel pro děti noční hru. Start ve 23:00, se svíčkami v lese.",
-    "left": { "label": "Paráda, jdu dělat stanoviště.", "effect": { "crew": 15, "safety": -10, "energy": -10 } },
+    "left": { "label": "Paráda, jdu dělat stanoviště.", "effect": { "crew": 20, "safety": -10, "energy": -10 } },
     "right": { "label": "Posuneme ji na zítřek před desátou a místo svíček vezmeme čelovky.", "effect": { "crew": -5 } },
     "log": "Noční klid od 22:00 platí i pro hry. A oheň jen pod dozorem – svíčky v lese mezi to nepatří."
   },
@@ -526,7 +526,7 @@
     "topic": "one-on-one",
     "character": "Tvůj stan",
     "text": "Ve stanu vedoucích teče střecha. Ve stanu dětí je místo navíc a děti volají: „Spi s námi!“",
-    "left": { "label": "Vyspím se s dětmi, jen dneska.", "effect": { "safety": -15, "trust": 10, "energy": 5 } },
+    "left": { "label": "Vyspím se s dětmi, jen dneska.", "effect": { "safety": -15, "trust": 10, "energy": 10 } },
     "right": { "label": "S Kubou zalepíme střechu izolepou a spím ve stanu vedoucích.", "effect": { "crew": 5, "energy": -5 } },
     "log": "Dospělí nespí ve stanu s dětmi. Chrání to děti i tebe – i když jde o jednu noc."
   },
@@ -540,7 +540,7 @@
     "character": "Zuzka (10)",
     "text": "Ve dvě v noci tě budí Zuzka: bojí se jít sama na latrínu.",
     "left": { "label": "Vzbudím i její kamarádku a půjdeme ve třech. Počkám venku a posvítím.", "effect": { "energy": -5 } },
-    "right": { "label": "„Je to kousek, zvládneš to sama.“", "effect": { "trust": -15, "energy": 10, "safety": -10 } },
+    "right": { "label": "„Je to kousek, zvládneš to sama.“", "effect": { "trust": -15, "energy": 15, "safety": -10 } },
     "log": "Doprovod v noci ano – ideálně s dalším dítětem nebo dospělým a vždy s odstupem."
   },
   {
@@ -577,7 +577,7 @@
     "character": "Čelovka ve tmě",
     "text": "U stanů vaší posádky se ve tmě pohybuje čelovka. Nevíš, čí je.",
     "left": { "label": "Dojdu blíž a zeptám se, kdo to je. Když to nedává smysl, volám SOS.", "effect": { "energy": -5 } },
-    "right": { "label": "Rovnou volám SOS a budím všechny vedoucí v okolí.", "effect": { "safety": 20, "crew": -15, "energy": -10 }, "logChoice": "Opatrnost je dobrá, ale nejdřív se podívej. Většinou je to někdo, kdo hledá latrínu." },
+    "right": { "label": "Rovnou volám SOS a budím všechny vedoucí v okolí.", "effect": { "safety": 20, "crew": -5, "energy": -10, "trust": -10 }, "logChoice": "Opatrnost je dobrá, ale nejdřív se podívej. Většinou je to někdo, kdo hledá latrínu." },
     "log": "Ptát se je v pořádku. Když si nejsi jistý nebo jistá, SOS je na to připravená."
   },
   {
@@ -590,7 +590,7 @@
     "character": "Ondra (13) a Matěj (11)",
     "text": "Ranní koupání. Ondra s Matějem chtějí skočit z mola dřív, než dorazí plavčík.",
     "left": { "label": "Počkáme na plavčíka. Kdo vydrží, skáče první.", "effect": { "trust": -5, "crew": 5 } },
-    "right": { "label": "„Jeden skok, hlídám vás.“", "effect": { "safety": -20, "trust": 10, "energy": 5 } },
+    "right": { "label": "„Jeden skok, hlídám vás.“", "effect": { "safety": -15, "trust": 10, "energy": 10 } },
     "log": "Do vody se chodí, když je u ní plavčík nebo určený dozor. Jeden skok je taky skok."
   },
   {
@@ -603,7 +603,7 @@
     "character": "Kuchyně",
     "text": "Tvoje posádka má službu v kuchyni. Na krájení čeká čtyři sta rohlíků.",
     "left": { "label": "Rozdělím práci a pustím hudbu.", "effect": { "crew": 5, "energy": -5 } },
-    "right": { "label": "Udělám to sám nebo sama, bude to rychlejší.", "effect": { "energy": -15, "crew": -5, "safety": 5 } }
+    "right": { "label": "Udělám to sám nebo sama, bude to rychlejší.", "effect": { "energy": -15, "safety": 5 } }
   },
   {
     "id": "missing-inhaler",
@@ -703,7 +703,7 @@
     "topic": "code-of-conduct",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba šeptá: „Kryj mě, jdu na hodinu za lidmi z Albatrosu. Kdyby se někdo ptal, jsem na latríně.“ Večerní program by zůstal na tobě s dvanácti dětmi.",
-    "left": { "label": "„Jasně, užij si to.“", "effect": { "crew": 15, "safety": -15 }, "set": ["covered-kuba"] },
+    "left": { "label": "„Jasně, užij si to.“", "effect": { "crew": 15, "safety": -15, "energy": 5 }, "set": ["covered-kuba"] },
     "right": { "label": "„Hodinu ne. Po programu klidně, a dáme vědět ostatním.“", "effect": { "crew": 5, "energy": -5 } },
     "log": "Krýt kolegu je kamarádské jen do chvíle, kdy zůstanou děti bez dozoru. Domluva funguje líp než lež."
   },
@@ -717,7 +717,7 @@
     "character": "Matěj (11)",
     "text": "Matěj brečí a chce volat mámě. Pravidla posádky říkají, že telefony jsou jen ráno.",
     "left": { "label": "Zavolá si, krátce a vedle mě.", "effect": { "energy": -5 } },
-    "right": { "label": "Pravidla jsou pravidla, ráno.", "effect": { "trust": -15, "safety": 10 } }
+    "right": { "label": "Pravidla jsou pravidla, ráno.", "effect": { "trust": -15, "safety": 15 } }
   },
   {
     "id": "concert-rules",
@@ -728,8 +728,8 @@
     "topic": "where-to-turn",
     "character": "Ostatní vedoucí",
     "text": "Nevíš, jestli děti smějí na večerní koncert bez vedoucího. Ostatní vedoucí krčí rameny.",
-    "left": { "label": "Na koncert je nepustím vůbec, ať je klid.", "effect": { "safety": 15, "trust": -15 }, "logChoice": "Zákaz pro jistotu je pohodlný, ale zbytečný. Odpověď najdeš v handbooku nebo v infostanu." },
-    "right": { "label": "Mrknu do handbooku, a když to tam není, zeptám se v infostanu.", "effect": { "energy": -5 } },
+    "left": { "label": "Na koncert je nepustím vůbec, ať je klid.", "effect": { "safety": 20, "trust": -15 }, "logChoice": "Zákaz pro jistotu je pohodlný, ale zbytečný. Odpověď najdeš v handbooku nebo v infostanu." },
+    "right": { "label": "Mrknu do handbooku, a když to tam není, zeptám se v infostanu.", "effect": {  } },
     "log": "Když nevíš a ostatní taky ne, je tu handbook a infostan. Hádat se nevyplácí."
   },
   {
@@ -757,7 +757,7 @@
     "requires": ["heat-push"],
     "text": "Zuzka večer zvrací a má horečku. Martin ze SZT se ptá, kolik odpoledne pila.",
     "left": { "label": "Řeknu po pravdě, že skoro nic, a zůstanu s ní.", "effect": { "energy": -10 } },
-    "right": { "label": "„Pila normálně, asi něco snědla.“", "effect": { "safety": -20, "crew": 5 } }
+    "right": { "label": "„Pila normálně, asi něco snědla.“", "effect": { "safety": -15, "crew": 5 } }
   },
   {
     "id": "boys-tent-visit",
@@ -769,7 +769,7 @@
     "character": "Myška (16)",
     "text": "Po večerce slyšíš ze stanu kluků Myščin hlas a smích.",
     "left": { "label": "Zaklepu na stan a pošlu Myšku zpátky k holkám.", "effect": { "energy": -5 } },
-    "right": { "label": "Vzbudím celý stan a ráno to napíšu jejich rodičům.", "effect": { "safety": 15, "trust": -15, "energy": -5 }, "logChoice": "Pravidlo platí, ale velká scéna a hned rodiče je víc, než situace potřebuje." }
+    "right": { "label": "Vzbudím celý stan a ráno to napíšu jejich rodičům.", "effect": { "safety": 20, "trust": -15, "energy": -5 }, "logChoice": "Pravidlo platí, ale velká scéna a hned rodiče je víc, než situace potřebuje." }
   },
   {
     "id": "energy-drinks",
@@ -804,8 +804,8 @@
     "topic": "where-to-turn",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba vypadá zničeně. Přizná, že doma řeší rozchod a tady to na něj všechno padá.",
-    "left": { "label": "Pošlu ho za Jindřichem do Uší pro duši a dopolední program převezmu.", "effect": { "crew": 5, "energy": -10 } },
-    "right": { "label": "„Hlavu vzhůru, to přejde. Máme program.“", "effect": { "crew": -10, "trust": -10, "energy": 5 } },
+    "left": { "label": "Pošlu ho za Jindřichem do Uší pro duši a dopolední program převezmu.", "effect": { "crew": 5, "energy": -5 } },
+    "right": { "label": "„Hlavu vzhůru, to přejde. Máme program.“", "effect": { "crew": -5, "trust": -10, "energy": 5 } },
     "log": "Uši pro duši jsou i pro dospělé. Kolega na dně neohrožuje jen sebe, ale i děti, za které odpovídá."
   },
   {
@@ -818,7 +818,7 @@
     "character": "Regata posádek",
     "text": "Regata posádek! Vaše loď nabírá vodu a děti chtějí za každou cenu do cíle.",
     "left": { "label": "Ke břehu, vylévat a vyhlásit morální vítězství.", "effect": {  } },
-    "right": { "label": "Hecneme to, cíl je blízko!", "effect": { "safety": -15, "crew": 15, "energy": -10 }, "set": ["regatta-sink"] }
+    "right": { "label": "Hecneme to, cíl je blízko!", "effect": { "safety": -15, "crew": 20, "energy": -10 }, "set": ["regatta-sink"] }
   },
   {
     "id": "hungover-leader",
@@ -830,7 +830,7 @@
     "character": "Vedoucí z vedlejší posádky",
     "text": "Vedoucí z vedlejší posádky ráno táhne alkoholem a vede děti k loďkám.",
     "left": { "label": "Řeknu mu, že takhle na vodu nemůže, a dám vědět SOS.", "effect": { "crew": -5 } },
-    "right": { "label": "Není to moje posádka. A možná je to jen ústní voda.", "effect": { "safety": -25, "crew": 5, "energy": 5 } },
+    "right": { "label": "Není to moje posádka. A možná je to jen ústní voda.", "effect": { "safety": -25, "crew": 10, "energy": 10 } },
     "log": "Alkohol je na Navigamu zakázaný všem. Dospělý pod vlivem u vody je nebezpečí – posádka nehraje roli."
   },
   {
@@ -843,7 +843,7 @@
     "character": "Fotka v chatu",
     "text": "Po posádkách koluje fotka spící Berušky s pomalovaným obličejem. Smějí se tomu i vedoucí.",
     "left": { "label": "Zasměju se a pošlu ji dál.", "effect": { "crew": 15, "trust": -15, "safety": -10 } },
-    "right": { "label": "Požádám o smazání a zjistím, kdo ji poslal dál.", "effect": { "trust": 5, "energy": -5 } },
+    "right": { "label": "Požádám o smazání a zjistím, kdo ji poslal dál.", "effect": { "trust": 5 } },
     "log": "Fotka spícího člověka je citlivá situace. Smích dospělých z ní dělá šikanu s razítkem."
   },
   {
@@ -857,7 +857,7 @@
     "requires": ["covered-kuba"],
     "text": "Hanka ze SOS se ptá: „Včera večer byla tvoje posádka hodinu bez druhého dospělého. Kde byl Kuba?“",
     "left": { "label": "Řeknu po pravdě, jak to bylo.", "effect": { "crew": -5 } },
-    "right": { "label": "„Na latríně, jak říkal.“", "effect": { "crew": 10, "safety": -15, "trust": -5 } }
+    "right": { "label": "„Na latríně, jak říkal.“", "effect": { "crew": 15, "safety": -15, "trust": -5 } }
   },
   {
     "id": "energy-crash",
@@ -869,8 +869,8 @@
     "character": "Ondra (13)",
     "requires": ["drinks-left"],
     "text": "Ondra v noci nespal. Ráno se třese a zvrací.",
-    "left": { "label": "Doprovodím ho do SZT a dám vědět rodičům.", "effect": { "energy": -10 } },
-    "right": { "label": "Dospí to v poledne.", "effect": { "safety": -20, "energy": 5 } }
+    "left": { "label": "Doprovodím ho do SZT a dám vědět rodičům.", "effect": { "energy": -5 } },
+    "right": { "label": "Dospí to v poledne.", "effect": { "safety": -15, "energy": 5 } }
   },
   {
     "id": "jindrich-self",
@@ -895,7 +895,7 @@
     "character": "Ondra (13)",
     "text": "Ondra spustil bahenní bitvu. Půlka posádky je hnědá od hlavy k patě.",
     "left": { "label": "Přidám se a pak vyhlásím koupel v jezeře pod dozorem.", "effect": { "crew": 5, "energy": -5 } },
-    "right": { "label": "Zakážu to, prádla už bylo dost.", "effect": { "trust": -10, "safety": 10, "crew": -10 } }
+    "right": { "label": "Zakážu to, prádla už bylo dost.", "effect": { "trust": -10, "safety": 15, "crew": -5 } }
   },
   {
     "id": "shower-shy",
@@ -933,8 +933,8 @@
     "character": "Martin (SZT)",
     "requires": ["regatta-sink"],
     "text": "Martin ze SZT: „Zuzka se při regatě nalokala vody a teď kašle. Nechám si ji tu pár hodin na pozorování.“",
-    "left": { "label": "Dobře, zastavím se za ní a dám vědět rodičům.", "effect": { "energy": -5 } },
-    "right": { "label": "„Kašel přejde, potřebujeme ji na odpolední hru.“", "effect": { "safety": -20, "crew": 5 } }
+    "left": { "label": "Dobře, zastavím se za ní a dám vědět rodičům.", "effect": {  } },
+    "right": { "label": "„Kašel přejde, potřebujeme ji na odpolední hru.“", "effect": { "safety": -15, "crew": 5 } }
   },
   {
     "id": "kuba-hearts",
@@ -946,7 +946,7 @@
     "character": "Kuba (kolega z posádky)",
     "text": "Všimneš si, že si Kuba večer píše s Myškou (16) a posílá jí srdíčka a „ty jsi tu nejhezčí“.",
     "left": { "label": "Řeknu mu to rovnou, ať přestane. Jestli ne, jdu za Jindřichem do Uší pro duši.", "effect": { "crew": -10 } },
-    "right": { "label": "Je to jen srdíčko, nebudu z toho dělat aféru.", "effect": { "safety": -25, "crew": 10 }, "set": ["ignored-kuba-messages"] },
+    "right": { "label": "Je to jen srdíčko, nebudu z toho dělat aféru.", "effect": { "safety": -25, "crew": 15, "energy": 5 }, "set": ["ignored-kuba-messages"] },
     "log": "Vedoucí a šestnáctiletá z jeho posádky nejsou dva kamarádi. Ozvi se i u kolegy, kterého máš rád nebo ráda."
   },
   {
@@ -983,7 +983,7 @@
     "character": "Kluci z Albatrosu",
     "text": "Kluci z Albatrosu chystají noční „přepadení“ vašich stanů s vodními pistolemi.",
     "left": { "label": "Prozradím to dětem a domluvíme protiútok – zítra po budíčku.", "effect": { "crew": 5 } },
-    "right": { "label": "Nachytám je a pošlu spát s kázáním o nočním klidu.", "effect": { "safety": 10, "crew": -10, "trust": -10 } }
+    "right": { "label": "Nachytám je a pošlu spát s kázáním o nočním klidu.", "effect": { "safety": 15, "crew": -5, "trust": -10 } }
   },
   {
     "id": "night-swim",
@@ -1007,7 +1007,7 @@
     "character": "Pepa (vedoucí posádky Albatros)",
     "text": "Pepa ti u stanu nabízí cigaretu: „Kuřárna je až na druhém konci, tady je to fuk.“",
     "left": { "label": "„Pojďme na vyhrazené místo, projdeme se.“", "effect": { "crew": 5, "energy": -5 } },
-    "right": { "label": "Zapálím si tady, děti spí.", "effect": { "crew": 10, "safety": -15, "energy": 5 } }
+    "right": { "label": "Vezmu mu cigarety a jdu ho nahlásit SOS.", "effect": { "safety": 15, "crew": -5, "trust": -5 }, "logChoice": "Upozornit ho je správně, ale dospělému brát cigarety a hned hlásit je přes čáru. Stačí jít na vyhrazené místo." }
   },
   {
     "id": "dm-at-night",
@@ -1032,7 +1032,7 @@
     "topic": "self-care",
     "character": "Děti z posádky",
     "text": "Budíček v šest: balení a úklid. Děti se neprobudí ani na trubku.",
-    "left": { "label": "Zahraju jim na ešus lodní poplach.", "effect": { "crew": 5 } },
+    "left": { "label": "Zahraju jim na ešus lodní poplach.", "effect": {  } },
     "right": { "label": "Nechám je spát a uklidím sám nebo sama.", "effect": { "energy": -15, "trust": 5 } }
   },
   {
@@ -1045,7 +1045,7 @@
     "character": "Matěj (11)",
     "text": "Matěj ztratil identifikační pásek. „Dneska už stejně jedeme…“",
     "left": { "label": "Zajdeme do infostanu pro náhradní.", "effect": { "energy": -5 } },
-    "right": { "label": "Bez pásku ho do odjezdu nepustím ani na krok od sebe.", "effect": { "safety": 15, "trust": -10, "energy": -10 }, "logChoice": "Náhradní pásek z infostanu to vyřeší za pět minut. Hlídat dítě na krok je zbytečné." }
+    "right": { "label": "Bez pásku ho do odjezdu nepustím ani na krok od sebe.", "effect": { "safety": 20, "trust": -10, "energy": -5 }, "logChoice": "Náhradní pásek z infostanu to vyřeší za pět minut. Hlídat dítě na krok je zbytečné." }
   },
   {
     "id": "albatros-trash",
@@ -1056,7 +1056,7 @@
     "topic": "respect",
     "character": "Posádka Albatros",
     "text": "Posádka Albatros odjíždí a nechává po sobě odpadky. „To uklidí areál.“",
-    "left": { "label": "Uklidíme svoje a Pepu poprosím, ať se vrátí uklidit to jejich.", "effect": { "crew": 5 } },
+    "left": { "label": "Uklidíme svoje a Pepu poprosím, ať se vrátí uklidit to jejich.", "effect": {  } },
     "right": { "label": "Uklidím to za ně, bude to rychlejší.", "effect": { "energy": -15, "crew": 5 } },
     "log": "Ohleduplnost platí i k lidem, kteří se o areál starají. Uklidit po sobě je základ."
   },
@@ -1071,7 +1071,7 @@
     "requires": ["ignored-kuba-messages"],
     "text": "Myška ti ráno ukáže telefon. Kuba jí v noci psal, ať za ním přijde ke stanu.",
     "left": { "label": "Půjdeme spolu hned za Jindřichem do Uší pro duši a za SOS.", "effect": { "crew": -10, "trust": 5 } },
-    "right": { "label": "Řeknu Kubovi, ať to smaže, a necháme to být.", "effect": { "safety": -30, "crew": 10 } },
+    "right": { "label": "Řeknu Kubovi, ať to smaže, a necháme to být.", "effect": { "safety": -30, "crew": 15 } },
     "log": "Tohle už není srdíčko. Nevyšetřuj a neřeš to „mezi sebou“ – předej to Ušim pro duši a SOS."
   },
   {
@@ -1085,7 +1085,7 @@
     "requires": ["bara-helped"],
     "text": "Jindřich: „Díky za včerejšek. Bára je v bezpečí a rodiče jsou na cestě. A jak je tobě?“",
     "left": { "label": "„V pohodě, nic to nebylo.“", "effect": { "energy": -10 } },
-    "right": { "label": "„Upřímně? Je mi z toho zle. Můžu si na chvíli sednout?“", "effect": { "energy": 15 } },
+    "right": { "label": "„Upřímně? Je mi z toho zle. Můžu si na chvíli sednout?“", "effect": { "energy": 10 } },
     "log": "Svěření dítěte zatíží i dospělého. Mluvit o tom s Ušima pro duši je správně."
   },
   {
@@ -1099,7 +1099,7 @@
     "requires": ["night-swim"],
     "text": "Hanka ze SOS: „V noci jsme u jezera viděli světlo a dvě holky z tvé posádky. Víš o tom něco?“",
     "left": { "label": "„Byly tam se mnou. Byla to chyba.“", "effect": { "crew": -5 } },
-    "right": { "label": "„Nemám tušení.“", "effect": { "crew": 10, "safety": -15, "trust": -5 } }
+    "right": { "label": "„Nemám tušení.“", "effect": { "crew": 15, "safety": -15, "trust": -5 } }
   },
   {
     "id": "goodbye-hugs",
@@ -1111,7 +1111,7 @@
     "character": "Tonda (17)",
     "text": "Loučení. Tonda chce obejmout každou holku z posádky – i ty, co se odtahují.",
     "left": { "label": "Řeknu nahlas: „Loučíme se, jak kdo chce – plácnutím, mávnutím nebo objetím.“", "effect": {  } },
-    "right": { "label": "Rozloučení je rozloučení, ať se nechají.", "effect": { "safety": -15, "crew": 5, "energy": 10 } },
+    "right": { "label": "Rozloučení je rozloučení, ať se nechají.", "effect": { "safety": -15, "crew": 10, "energy": 10 } },
     "log": "I při loučení platí: dotyk jen se souhlasem. Nabídnout víc možností pomůže všem."
   },
   {
@@ -1123,7 +1123,7 @@
     "topic": "photos",
     "character": "Chat rodičů",
     "text": "Rodiče chtějí do chatu fotky z akce. Máš jich tři sta, včetně koupání.",
-    "left": { "label": "Nepošlu nic, ať nic neunikne.", "effect": { "safety": 15, "crew": -15 }, "logChoice": "Rodiče mají právo vidět, jak se dětem dařilo. Stačí vybírat." },
+    "left": { "label": "Nepošlu nic, ať nic neunikne.", "effect": { "safety": 20, "crew": -5, "trust": -10 }, "logChoice": "Rodiče mají právo vidět, jak se dětem dařilo. Stačí vybírat." },
     "right": { "label": "Vyberu fotky bez plavek a citlivých chvil.", "effect": { "energy": -5 } },
     "log": "I do soukromého chatu rodičů patří jen fotky bez citlivých situací. Fotka jednou odeslaná žije vlastním životem."
   },
@@ -1136,7 +1136,7 @@
     "topic": "self-care",
     "character": "Kuba (kolega z posádky)",
     "text": "Ve vlaku domů děti řádí a tobě padají víčka.",
-    "left": { "label": "Domluvím se s Kubou na střídání: hodinu hlídá on, hodinu já.", "effect": { "energy": 15, "crew": 5 } },
+    "left": { "label": "Domluvím se s Kubou na střídání: hodinu hlídá on, hodinu já.", "effect": { "energy": 5 } },
     "right": { "label": "Usnu, Kuba to zvládne.", "effect": { "safety": -15, "energy": 20, "crew": -5 } }
   },
   {
@@ -1149,7 +1149,7 @@
     "character": "Zuzka (10)",
     "text": "Při přestupu v Ostravě počítáš děti. Chybí Zuzka.",
     "left": { "label": "Kuba zůstane s dětmi, já se vracím na nástupiště a hlásím to personálu.", "effect": { "energy": -10 } },
-    "right": { "label": "Určitě nastoupila do jiného vagonu, ozve se.", "effect": { "safety": -25, "energy": 5 } }
+    "right": { "label": "Určitě nastoupila do jiného vagonu, ozve se.", "effect": { "safety": -20, "energy": 10 } }
   },
   {
     "id": "pepa-handshake",
@@ -1161,7 +1161,7 @@
     "character": "Pepa (vedoucí posádky Albatros)",
     "requires": ["talked-pepa"],
     "text": "Pepa ti na nádraží podá ruku: „Díky za ten páteční rozhovor. Příště to u nás bude bez piva.“",
-    "left": { "label": "Podám ruku a pozvu Albatros na naši letní plavbu.", "effect": { "crew": 10 } },
+    "left": { "label": "Podám ruku a pozvu Albatros na naši letní plavbu.", "effect": { "crew": 5 } },
     "right": { "label": "„No to doufám.“", "effect": { "crew": -5 } }
   },
   {
@@ -1187,7 +1187,7 @@
     "character": "Ondra (13) a Matěj (11)",
     "text": "Ve vlaku si Ondra s Matějem pouštějí na mobilu video, které rozhodně není pro jejich věk.",
     "left": { "label": "Přisednu si, nechám to vypnout a zeptám se, kde to našli.", "effect": { "energy": -5 } },
-    "right": { "label": "Jejich telefon, jejich věc.", "effect": { "safety": -10, "trust": 5, "energy": 10 } }
+    "right": { "label": "Telefony zabavím všem až do Prahy.", "effect": { "safety": 15, "trust": -15 }, "logChoice": "Vypnout nevhodné video ano, kolektivní trest ne. Lepší je mluvit s těmi dvěma." }
   },
   {
     "id": "conductor",
@@ -1199,7 +1199,7 @@
     "character": "Průvodčí",
     "text": "Průvodčí si stěžuje, že vaše posádka obsadila celý vagon a kytara je slyšet až v jídelním voze.",
     "left": { "label": "Omluvím se a posádku stáhneme do dvou kupé.", "effect": { "crew": -5 } },
-    "right": { "label": "„Jsme skauti, zpíváme, to se ví!“", "effect": { "crew": 10, "trust": -5, "energy": 5 } }
+    "right": { "label": "„Jsme skauti, zpíváme, to se ví!“", "effect": { "crew": 15, "trust": -5, "energy": 5 } }
   },
   {
     "id": "bara-window",
@@ -1211,7 +1211,7 @@
     "character": "Bára (12)",
     "text": "Bára sedí ve vlaku u okna a tiše řekne: „Nechci domů.“",
     "left": { "label": "Sednu si k ní a zeptám se, co se doma děje.", "effect": { "trust": 5, "energy": -5 } },
-    "right": { "label": "„Každého to po akci mrzí, za rok zas!“", "effect": { "trust": -15, "energy": 5 } },
+    "right": { "label": "„Každého to po akci mrzí, za rok zas!“", "effect": { "trust": -15, "energy": 10 } },
     "log": "„Nechci domů“ může být smutek po akci, ale i signál. Poslouchej; po akci pomůže Linka bezpečí 116 111 nebo Uši pro duši."
   },
   {
@@ -1223,7 +1223,7 @@
     "topic": "photos",
     "character": "Kuba (kolega z posádky)",
     "text": "Kuba usnul v kupé s hlavou na batohu a pusou dokořán.",
-    "left": { "label": "Přikryju ho bundou a hlídám zastávky.", "effect": { "crew": 5, "energy": -5 } },
+    "left": { "label": "Přikryju ho bundou a hlídám zastávky.", "effect": { "energy": -5 } },
     "right": { "label": "Vyfotím ho do chatu posádky.", "effect": { "crew": 10, "trust": -10 } }
   },
   {
@@ -1236,7 +1236,7 @@
     "character": "Matějova máma",
     "text": "Doma ti večer píše Matějova máma: „Matěj říká, že mu kluci schovávali boty. Proč jsme se to nedozvěděli?“",
     "left": { "label": "Napíšu po pravdě, co se stalo a jak jsme to řešili.", "effect": { "energy": -5 } },
-    "right": { "label": "„To byla jen klučičí sranda.“", "effect": { "trust": -15, "energy": 5 } },
+    "right": { "label": "„To byla jen klučičí sranda.“", "effect": { "trust": -15, "energy": 10 } },
     "log": "Rodiče mají právo vědět, co se jejich dítěti dělo. Otevřenost buduje důvěru na další akce."
   },
   {
@@ -1249,7 +1249,7 @@
     "character": "Tvůj počítač",
     "text": "Doma třídíš fotky. Nejlepší je ta, kde Bára pláče štěstím při vyhlášení.",
     "left": { "label": "Na web posádky ji dám až s jejím souhlasem a souhlasem rodičů.", "effect": { "energy": -5 } },
-    "right": { "label": "Nahraju ji, je to krásný moment.", "effect": { "safety": -10, "crew": 10 } }
+    "right": { "label": "Nahraju ji, je to krásný moment.", "effect": { "safety": -10, "crew": 15 } }
   },
   {
     "id": "home-sleep",
@@ -1260,7 +1260,7 @@
     "topic": "self-care",
     "character": "Doma",
     "text": "Doma. Pračka hučí, ve vlasech písek, postel volá.",
-    "left": { "label": "Spím dvanáct hodin.", "effect": { "energy": 20 } },
+    "left": { "label": "Spím dvanáct hodin.", "effect": { "energy": 10 } },
     "right": { "label": "Ještě dnes napíšu zápis do kroniky posádky.", "effect": { "energy": -5, "crew": 5 } }
   },
   {
@@ -1272,7 +1272,7 @@
     "topic": "where-to-turn",
     "character": "Jindřich (Uši pro duši)",
     "text": "Některé situace z akce se ti pořád vracejí a nemůžeš usnout.",
-    "left": { "label": "Napíšu Jindřichovi – říkal, že se můžeme ozvat i po akci.", "effect": { "energy": 10 } },
+    "left": { "label": "Napíšu Jindřichovi – říkal, že se můžeme ozvat i po akci.", "effect": { "energy": 5 } },
     "right": { "label": "To přejde, nebudu nikoho otravovat.", "effect": { "energy": -15, "trust": -5 } },
     "log": "Těžké věci z akce si nemusíš nést sám ani sama. Ozvat se je v pořádku i po akci."
   }
