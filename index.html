@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d2235">
+  <title>Bezpečný Navigamus</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/game.js"></script>
+</head>
+<body>
+  <main id="app">
+
+    <!-- Intro -->
+    <section id="screen-intro" class="screen" hidden>
+      <div class="panel">
+        <p class="kicker">Navigamus 2027 · Hlučínské jezero</p>
+        <h1>Bezpečný Navigamus</h1>
+        <p>Čtyři dny, dva tisíce lidí, jedna loď. Rozhoduj, jak bys jednal nebo jednala ty – tažením karty doleva nebo doprava.</p>
+        <ul class="legend">
+          <li><span>🛡️</span> <b>Bezpečí</b> – jsou lidé kolem tebe v bezpečí</li>
+          <li><span>🤝</span> <b>Důvěra</b> – dá se za tebou přijít</li>
+          <li><span>👥</span> <b>Parta</b> – vztahy s ostatními</li>
+          <li><span>🔋</span> <b>Síly</b> – tvoje energie</li>
+        </ul>
+        <p>Pozor: ani prázdný, ani přetékající ukazatel nevěstí nic dobrého.</p>
+        <p class="note">Hra obsahuje situace týkající se alkoholu, šikany, nevhodného chování a zneužívání. Pokud tě něco z toho tíží, obrať se na <a href="https://krizovatka.skaut.cz/bezpecnyskauting/usi-pro-dusi" target="_blank" rel="noopener">Uši pro duši</a>.</p>
+        <div class="actions">
+          <button id="btn-continue" class="primary" hidden></button>
+          <button id="btn-new" class="primary">Vyplout</button>
+        </div>
+        <p id="found-intro" class="found"></p>
+      </div>
+    </section>
+
+    <!-- Game -->
+    <section id="screen-game" class="screen" hidden>
+      <header class="meters" id="meters"></header>
+      <p class="when" id="when"></p>
+      <div class="stage">
+        <article class="card" id="card" tabindex="0" aria-live="polite">
+          <p class="choice-hint" id="choice-hint"></p>
+          <p class="character" id="character"></p>
+          <p class="text" id="text"></p>
+        </article>
+      </div>
+      <div class="choices">
+        <button id="btn-left" class="choice"></button>
+        <button id="btn-right" class="choice"></button>
+      </div>
+    </section>
+
+    <!-- Daily log -->
+    <section id="screen-log" class="screen" hidden>
+      <div class="panel">
+        <p class="kicker">Lodní deník</p>
+        <h2 id="log-title"></h2>
+        <ol id="log-list" class="log"></ol>
+        <div class="actions"><button id="btn-log-next" class="primary"></button></div>
+      </div>
+    </section>
+
+    <!-- Ending (fall or good) -->
+    <section id="screen-ending" class="screen" hidden>
+      <div class="panel">
+        <p class="ending-icon" id="ending-icon"></p>
+        <p class="kicker" id="ending-kicker"></p>
+        <h2 id="ending-title"></h2>
+        <p id="ending-text"></p>
+        <div class="debrief">
+          <p class="kicker">Rozbor</p>
+          <p id="ending-debrief"></p>
+        </div>
+        <div id="seal" class="seal" hidden>
+          <p class="kicker">Pečeť Bezpečného Navigamu</p>
+          <p class="seal-code" id="seal-code"></p>
+          <p class="note">Kód si ulož – budeš ho potřebovat při registraci.</p>
+        </div>
+        <p id="found-ending" class="found"></p>
+        <div class="actions"><button id="btn-ending-next" class="primary"></button></div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
