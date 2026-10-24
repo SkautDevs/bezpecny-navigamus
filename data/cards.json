@@ -1212,7 +1212,7 @@
     "text": "Bára sedí ve vlaku u okna a tiše řekne: „Nechci domů.“",
     "left": { "label": "Sednu si k ní a zeptám se, co se doma děje.", "effect": { "trust": 5, "energy": -5 } },
     "right": { "label": "„Každého to po akci mrzí, za rok zas!“", "effect": { "trust": -15, "energy": 10 } },
-    "log": "„Nechci domů“ může být smutek po akci, ale i signál. Poslouchej a nezlehčuj. Po akci se můžeš poradit na Skautské krizové lince 737 205 520 (nonstop) nebo napsat na poradna@skaut.cz."
+    "log": "„Nechci domů“ může být smutek po akci, ale i signál. Poslouchej a nezlehčuj. Po akci se můžeš poradit na Skautské krizové lince 737 205 520 (nonstop) nebo napsat na poradna@skaut.cz. Když jde o akutní ohrožení, volej nejdřív 158, 155 nebo 112."
   },
   {
     "id": "sleeping-kuba",
