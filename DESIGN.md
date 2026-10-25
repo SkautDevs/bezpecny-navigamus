@@ -2,7 +2,7 @@
 
 Navigamus 2027, 3.–6. 6. 2027, Hlučínské jezero. Akce je jednou za tři roky, texty nesmí předpokládat „za rok zas“. Hra nahrazuje povinný test
 „Bezpečný Navigamus“ (pravidla akce + Safe from Harm). Výchozí podklad:
-`podklady/` – draft původních testových otázek (mimo git).
+`sources/navigamus-test-questions-draft.md` – draft původních testových otázek (mimo git).
 
 ## Cíl
 
@@ -139,7 +139,7 @@ s humorem, vážné bez vtipů.
 - Statický web, mobil na prvním místě, bez instalace a přihlášení.
 - Čisté HTML + CSS + JS, bez frameworku, bez build kroku, bez externích závislostí.
 - Kód (identifikátory, komentáře, JSON klíče) anglicky, texty pro hráče česky.
-- Karty v JSON. `kontrola.html` zobrazí karty jako scénář a validuje
+- Karty v JSON. `check.html` zobrazí karty jako scénář a validuje
   (povinné karty dosažitelné, konce dosažitelné, příznaky navazujících karet existují).
 - Postup v `localStorage`.
 - Upozornění na obsah na začátku hry.

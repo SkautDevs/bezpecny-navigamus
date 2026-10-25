@@ -304,7 +304,7 @@ function showEnding(id) {
   show('ending');
 }
 
-// TODO: personal, verifiable code once registration integration is decided (see NAVRH.md, Otevřené body).
+// TODO: personal, verifiable code once registration integration is decided (see DESIGN.md, Otevřené body).
 function sealCode() {
   let code = load(STORAGE_SEAL, null);
   if (!code) {
