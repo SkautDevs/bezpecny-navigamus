@@ -112,7 +112,15 @@ Zdroj: [Podmínky účasti](https://navigamus.cz/podminky-akce) + upřesnění o
 - **Noční klid od 22:00.**
 - **Oheň povolený pod dozorem.**
 - **Šátek a identifikační pásek povinné.**
-- **Služby na akci: Uši pro duši, SOS, SZT, infostan** (+ handbook, servis tým).
+- **Služby na akci: Uši pro duši, SOS (Skautská ochranná služba), SZT (Skautský
+  záchranný tým), infostan, registrace** (+ handbook, servis tým). Registrace
+  běží celou akci (návštěvy, náhradní pásky). Infostan = informace a handbook.
+- **Kam karty posílají:** zdraví → SZT; bezpečí, cizí lidé, pravidla a jejich
+  porušení dospělými → SOS; Safe from Harm (svěření dítěte, hranice, nevhodné
+  zprávy) → **Uši pro duši jako první**, SOS jen když je třeba zasáhnout hned
+  (Láďa ve tmě, opilý vedoucí u vody). Každá karta odkazuje na jeden tým,
+  nikdy „A nebo B“. Po akci → Skautská krizová linka 737 205 520,
+  poradna@skaut.cz (Uši pro duši jsou tým akce).
 - **Focení povolené**, ale: zveřejňovat jen se souhlasem (cizí děti ne, svoje
   posádka dle souhlasů rodičů), citlivé situace (plavky, převlékání, sprchy,
   spaní, pláč, zranění) nikdy, a když se někdo ohradí, respektuješ to.

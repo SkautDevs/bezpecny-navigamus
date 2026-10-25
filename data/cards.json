@@ -114,7 +114,7 @@
     "text": "Kluci z cizí posádky schovali Matějovi boty do latríny. Smějí se, Matěj stojí bos a kouká do země. „Je to jenom sranda,“ mávne rukou Ondra.",
     "left": { "label": "Nechám to na jejich vedoucím, až ho potkám.", "effect": { "safety": -35, "trust": -10, "crew": 5 }, "set": ["ignored-bullying"] },
     "right": { "label": "Zarazím to, promluvím s Matějem a řeknu to jejich vedoucímu.", "effect": { "trust": 5, "energy": -5 } },
-    "log": "Šikana začíná „jenom srandou“. Kdo stojí opodál, rozhoduje, jestli bude pokračovat. Mluvit o tom se dá s vedoucím posádky i v Ušich pro duši."
+    "log": "Šikana začíná „jenom srandou“. Kdo stojí opodál, rozhoduje, jestli bude pokračovat. Mluvit o tom se dá s vedoucím posádky i v Uších pro duši."
   },
   {
     "id": "homesick-talk",
@@ -153,7 +153,7 @@
     "text": "Na stanovištích je frmol. Cestou na latrínu si všimneš kluka, který místo programu sedí stranou s hlavou v dlaních.",
     "left": { "label": "Dojdu pro někoho z Uší pro duši, ať to řeší oni.", "effect": { "trust": 15, "safety": 10, "energy": -10 }, "logChoice": "Uši pro duši jsou správná adresa, ale nejdřív se zeptej ty. Ne každý, kdo sedí stranou, je v krizi, a někomu stačí, že si ho někdo všiml." },
     "right": { "label": "Zeptám se, co potřebuje, a nabídnu SZT nebo Uši pro duši.", "effect": { "trust": 5, "energy": -5 } },
-    "log": "Na akci jsou tři místa, kam můžeš poslat kohokoli – i sebe: SZT kvůli zdraví, Uši pro duši, když je těžko na duši, SOS kvůli bezpečí. Kdo neví, kam jít, zeptá se v infostanu nebo kohokoli ze servis týmu."
+    "log": "Na akci jsou tři místa, kam můžeš poslat kohokoli – i sebe: SZT (Skautský záchranný tým) kvůli zdraví, Uši pro duši, když je těžko na duši, SOS (Skautská ochranná služba) kvůli bezpečí. Kdo neví, kam jít, zeptá se v infostanu nebo kohokoli ze servis týmu."
   },
   {
     "id": "kuba-ankle",
@@ -271,7 +271,7 @@
     "text": "Už potřetí vidíš, jak Tonda dává holkám ruku kolem ramen nebo jim ji položí na koleno. Holky se tváří rozpačitě a brzy odcházejí.",
     "left": { "label": "Počkám, jestli si holky neřeknou samy.", "effect": { "safety": -35, "trust": -10, "energy": 10 } },
     "right": { "label": "Vezmu ho stranou a řeknu mu, ať toho nechá.", "effect": { "crew": -5 } },
-    "log": "Kdo nemá odvahu říct „ne“, ještě nesouhlasí. Věcný rozhovor stranou je lepší než veřejné pranýřování; dál pomůžou Uši pro duši nebo SOS."
+    "log": "Kdo nemá odvahu říct „ne“, ještě nesouhlasí. Věcný rozhovor stranou je lepší než veřejné pranýřování; když to nepomůže, jsou tu Uši pro duši."
   },
   {
     "id": "matej-wants-home",
@@ -311,7 +311,7 @@
     "text": "Bára tě odchytí stranou, oči uplakané: „Můžu ti něco říct? Ale musíš slíbit, že to nikomu neřekneš. Týká se to jednoho vedoucího.“",
     "left": { "label": "Slibuju. Zůstane to mezi námi.", "effect": { "trust": 10, "safety": -45 }, "set": ["promised-silence"] },
     "right": { "label": "To slíbit nemůžu. Ale pomůžu ti. Poslouchám.", "effect": { "safety": 5 }, "set": ["bara-helped"] },
-    "log": "Mlčení nikdy neslibuj – možná budeš potřebovat pomoc. Poslouchej, nevyšetřuj, nezpochybňuj a co nejdřív to předej Ušim pro duši nebo SOS."
+    "log": "Mlčení nikdy neslibuj – možná budeš potřebovat pomoc. Poslouchej, nevyšetřuj, nezpochybňuj a co nejdřív to předej Uším pro duši – ti vědí, co dál."
   },
   {
     "id": "staggering",
@@ -337,7 +337,7 @@
     "text": "Ve tmě vidíš Láďu, vedoucího z cizí posádky, jak zve čtrnáctiletou holku z jiného tábořiště k sobě do stanu „na čaj, ať jí není zima“. Už podruhé.",
     "left": { "label": "Není to moje posádka. Třeba to tak nemyslí.", "effect": { "safety": -50, "crew": 5 } },
     "right": { "label": "Doprovodím ji k jejím a hned to řeknu SOS.", "effect": { "crew": -5, "safety": 5 } },
-    "log": "Nevhodné chování dospělého nemusíš dokazovat. Stačí, že ti něco nesedí: zakroč a oznam to SOS nebo Ušim pro duši – i když jde o kolegu."
+    "log": "Nevhodné chování dospělého nemusíš dokazovat. Stačí, že ti něco nesedí: zakroč a oznam to SOS – i když jde o kolegu. Když nejde o okamžitý zásah, jsou první adresou Uši pro duši."
   },
   {
     "id": "bara-promise-again",
@@ -1044,8 +1044,8 @@
     "topic": "stranger",
     "character": "Matěj (11)",
     "text": "Matěj ztratil identifikační pásek. „Dneska už stejně jedeme…“",
-    "left": { "label": "Zajdeme do infostanu pro náhradní.", "effect": { "energy": -5 } },
-    "right": { "label": "Bez pásku zůstane do odjezdu u stanu se mnou.", "effect": { "safety": 15, "trust": -10, "energy": -5 }, "logChoice": "Náhradní pásek z infostanu to vyřeší za pět minut. Držet dítě u stanu je zbytečné." }
+    "left": { "label": "Zajdeme na registraci pro náhradní.", "effect": { "energy": -5 } },
+    "right": { "label": "Bez pásku zůstane do odjezdu u stanu se mnou.", "effect": { "safety": 15, "trust": -10, "energy": -5 }, "logChoice": "Náhradní pásek z registrace to vyřeší za pět minut. Držet dítě u stanu je zbytečné." }
   },
   {
     "id": "albatros-trash",
@@ -1070,9 +1070,9 @@
     "character": "Myška (16)",
     "requires": ["ignored-radek-messages"],
     "text": "Myška ti ráno ukáže telefon. Radek jí v noci psal, ať za ním přijde ke stanu.",
-    "left": { "label": "Jdeme spolu hned do Uší pro duši a za SOS.", "effect": { "crew": -10, "trust": 5 } },
+    "left": { "label": "Jdeme spolu hned do Uší pro duši.", "effect": { "crew": -10, "trust": 5 } },
     "right": { "label": "Řeknu Radkovi, ať to smaže, a necháme to být.", "effect": { "safety": -50, "crew": 15 } },
-    "log": "Tohle už není srdíčko. Nevyšetřuj a neřeš to „mezi sebou“ – předej to Ušim pro duši a SOS."
+    "log": "Tohle už není srdíčko. Nevyšetřuj a neřeš to „mezi sebou“ – předej to Uším pro duši, ti zapojí, koho je třeba."
   },
   {
     "id": "jindrich-thanks",
@@ -1272,8 +1272,8 @@
     "topic": "where-to-turn",
     "character": "Doma po akci",
     "text": "Některé situace z akce se ti pořád vracejí a nemůžeš usnout.",
-    "left": { "label": "Ozvu se Uším pro duši, fungují i po akci.", "effect": { "energy": 5 } },
+    "left": { "label": "Zavolám na Skautskou krizovou linku, je nonstop.", "effect": { "energy": 5 } },
     "right": { "label": "To přejde, nebudu nikoho otravovat.", "effect": { "energy": -15, "trust": -5 } },
-    "log": "Těžké věci z akce si nemusíš nést sám ani sama. Uši pro duši jsou standardní služba pro celý Junák, ozvat se jde i po akci."
+    "log": "Těžké věci z akce si nemusíš nést sám ani sama. Po akci je tu Skautská krizová linka 737 205 520 (nonstop) nebo poradna@skaut.cz."
   }
 ]
