@@ -1,6 +1,6 @@
 # Bezpečný Navigamus – hra místo testu (návrh)
 
-Navigamus 2027, 3.–6. 6. 2027, Hlučínské jezero. Hra nahrazuje povinný test
+Navigamus 2027, 3.–6. 6. 2027, Hlučínské jezero. Akce je jednou za tři roky, texty nesmí předpokládat „za rok zas“. Hra nahrazuje povinný test
 „Bezpečný Navigamus“ (pravidla akce + Safe from Harm). Výchozí podklad:
 `testové otázky Navigamus-draft.docx.md`.
 
