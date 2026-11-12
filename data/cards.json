@@ -1019,7 +1019,7 @@
     "character": "Ondra (13)",
     "requires": ["gave-number"],
     "text": "V jedenáct v noci ti Ondra píše soukromou zprávu: „Můžu přijít k tobě do stanu? Nemůžu spát.“",
-    "left": { "label": "Odepíšu, že ne, ať vzbudí kamaráda. Ráno si promluvíme.", "effect": { "trust": -5 } },
+    "left": { "label": "Odepíšu, že ne, ať vzbudí kamaráda. Ráno si promluvíme. Popřípadě nabídnu mu doprovod do Uší, fungují i v noci.", "effect": { "trust": -5 } },
     "right": { "label": "Pustím ho, jen na chvilku, ať se uklidní.", "effect": { "safety": -50, "trust": 10 } },
     "log": "Dítě v noci ve stanu dospělého je situace, která se nesmí stát. Ani „na chvilku“."
   },
