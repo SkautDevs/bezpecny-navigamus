@@ -1,20 +1,12 @@
-// Content checker: validates cards.json, simulates games for balance,
+// Content checker: validates event cards/endings, simulates games for balance,
 // and renders all cards as a readable script for reviewers.
 import { METERS, SLOTS, DAYS, SLOT_SIZE, simulate } from './engine.js';
+import { EVENTS, TOPICS, resolveEvent, DAY_NAMES, SLOT_NAMES, METER_ICONS } from './events.js';
+import { $, el, setEventParam } from './dom.js';
 
-const TOPICS = [
-  'alcohol', 'one-on-one', 'boundaries', 'photos', 'bullying', 'confiding',
-  'adult-misconduct', 'where-to-turn', 'water', 'night-quiet', 'fire', 'stranger',
-  'smoking', 'self-care', 'code-of-conduct', 'respect',
-];
-const DAY_NAMES = { 1: 'Čtvrtek', 2: 'Pátek', 3: 'Sobota', 4: 'Neděle' };
-const SLOT_NAMES = { morning: 'Ráno', afternoon: 'Odpoledne', evening: 'Večer', night: 'Noc' };
-const METER_ICONS = { safety: '🛡️', trust: '🤝', crew: '👥', energy: '🔋' };
 const SIM_RUNS = 2000;
 
-const $ = (id) => document.getElementById(id);
-
-function validate(cards, endings) {
+function validate(cards, endings, topics) {
   const errors = [];
   const warnings = [];
   const ids = new Set();
@@ -28,7 +20,7 @@ function validate(cards, endings) {
     ids.add(c.id);
     if (!DAYS.includes(c.day)) errors.push(`${where}: neplatný day ${c.day}`);
     if (!SLOTS.includes(c.slot)) errors.push(`${where}: neplatný slot ${c.slot}`);
-    if (!TOPICS.includes(c.topic)) errors.push(`${where}: neznámé topic ${c.topic}`);
+    if (!topics.includes(c.topic)) errors.push(`${where}: nepovolené topic ${c.topic}`);
     if (!c.text) errors.push(`${where}: chybí text`);
     if (!['left', 'right', 'both', 'neither'].includes(c.intended)) warnings.push(`${where}: chybí intended`);
     for (const side of ['left', 'right']) {
@@ -50,7 +42,7 @@ function validate(cards, endings) {
   for (const f of flagsUsed) if (!flagsSet.has(f)) errors.push(`příznak „${f}“ se vyžaduje, ale žádná volba ho nenastavuje`);
   for (const f of flagsSet) if (!flagsUsed.has(f)) warnings.push(`příznak „${f}“ se nastavuje, ale nic ho nepoužívá`);
 
-  for (const t of TOPICS) {
+  for (const t of topics) {
     if (!cards.some((c) => c.topic === t && c.required)) warnings.push(`téma ${t} nemá povinnou kartu`);
   }
   for (const d of DAYS) for (const s of SLOTS) {
@@ -58,7 +50,6 @@ function validate(cards, endings) {
     if (n < SLOT_SIZE) warnings.push(`${DAY_NAMES[d]} ${SLOT_NAMES[s]}: jen ${n} karet bez podmínky (cíl ${SLOT_SIZE})`);
   }
 
-  const endingIds = new Set(endings.map((e) => e.id));
   for (const m of METERS) for (const edge of [0, 100]) {
     const e = endings.find((x) => x.id === `${m}-${edge}`);
     if (!e) errors.push(`chybí konec ${m}-${edge}`);
@@ -70,10 +61,8 @@ function validate(cards, endings) {
 function runSimulations(cards) {
   const policies = {
     'náhodně': (card, state, rng) => (rng() < 0.5 ? 'left' : 'right'),
-    // Plays the side authors marked as the appropriate one; should almost always reach Sunday.
     'zamýšlená volba': (card, state, rng) =>
       (['left', 'right'].includes(card.intended) ? card.intended : rng() < 0.5 ? 'left' : 'right'),
-    // Picks the choice that keeps meters closest to the middle: a "thoughtful" player.
     'vyvažuje': (card, state) => {
       const cost = (side) => METERS.reduce((sum, m) => {
         const v = state.meters[m] + ((card[side].effect || {})[m] || 0);
@@ -105,13 +94,6 @@ function fmtEffect(effect = {}) {
     .join('  ') || '—';
 }
 
-function el(tag, cls, text) {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  if (text !== undefined) e.textContent = text;
-  return e;
-}
-
 function renderList(target, items, cls) {
   const ul = el('ul', cls);
   for (const it of items) ul.append(el('li', '', it));
@@ -129,7 +111,6 @@ function renderSim(rows) {
       el('td', '', r.avgFalls.toFixed(2)), el('td', '', String(r.stuck)));
     table.append(tr);
   }
-  // Endings the random player (almost) never sees are effectively unreachable.
   const random = rows.find((r) => r.name === 'náhodně');
   const rare = METERS.flatMap((m) => [`${m}-0`, `${m}-100`])
     .filter((id) => (random.falls[id] || 0) < SIM_RUNS * 0.05)
@@ -180,18 +161,32 @@ function renderScript(cards) {
   }
 }
 
-async function boot() {
+function renderSwitcher(activeEvent) {
+  const box = $('event-switcher');
+  box.replaceChildren();
+  for (const ev of Object.values(EVENTS)) {
+    const btn = el('button', ev.id === activeEvent.id ? 'active' : '', ev.label);
+    btn.onclick = () => {
+      setEventParam(ev.id);
+      boot(ev);
+    };
+    box.append(btn);
+  }
+}
+
+async function boot(ev = resolveEvent()) {
+  renderSwitcher(ev);
+  $('sim').textContent = 'Počítám…';
   const [cards, endings] = await Promise.all([
-    fetch('data/cards.json').then((r) => r.json()),
-    fetch('data/endings.json').then((r) => r.json()),
+    fetch(ev.cards).then((r) => r.json()),
+    fetch(ev.endings).then((r) => r.json()),
   ]);
   const required = cards.filter((c) => c.required).length;
-  $('summary').textContent = `${cards.length} karet, z toho ${required} povinných.`;
-  const { errors, warnings } = validate(cards, endings);
+  $('summary').textContent = `${ev.title}: ${cards.length} karet, z toho ${required} povinných.`;
+  const { errors, warnings } = validate(cards, endings, TOPICS);
   renderList($('errors'), errors, 'errors');
   renderList($('warnings'), warnings, 'warnings');
   renderScript(cards);
-  // Simulation is the slow part; let the page paint first.
   setTimeout(() => renderSim(runSimulations(cards)), 50);
 }
 
