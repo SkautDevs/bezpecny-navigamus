@@ -4,6 +4,7 @@
 export const METERS = ['safety', 'trust', 'crew', 'energy'];
 export const SLOTS = ['morning', 'afternoon', 'evening', 'night'];
 export const DAYS = [1, 2, 3, 4];
+export const LAST_DAY = DAYS[DAYS.length - 1];
 export const START_VALUE = 50;
 export const SLOT_SIZE = 3; // minimum cards per slot; required cards may exceed it
 export const RESTART_RANGE = [30, 70]; // meters are pulled into this range when a day is retried
@@ -26,15 +27,16 @@ export function snapshot(state) {
   return { day: state.day, meters: { ...state.meters }, flags: [...state.flags], history: [...state.history] };
 }
 
-// Retrying after a fall; a fall also rules out the secret ending.
-export function restoreCheckpoint(state) {
+// Restores state to the start-of-day checkpoint.
+// On a retry after a fall (`penalty: true`), clears `perfect` and pulls meters into RESTART_RANGE.
+export function restoreCheckpoint(state, { penalty = true } = {}) {
   const cp = state.checkpoint;
-  state.perfect = false;
+  if (penalty) state.perfect = false;
   state.day = cp.day;
   state.flags = [...cp.flags];
   state.history = [...(cp.history || [])];
   for (const m of METERS) {
-    state.meters[m] = clamp(cp.meters[m], RESTART_RANGE[0], RESTART_RANGE[1]);
+    state.meters[m] = penalty ? clamp(cp.meters[m], RESTART_RANGE[0], RESTART_RANGE[1]) : cp.meters[m];
   }
 }
 
@@ -69,6 +71,7 @@ export function applyChoice(state, card, side) {
   for (const f of choice.set || []) {
     if (!state.flags.includes(f)) state.flags.push(f);
   }
+  if (!state.seen.includes(card.id)) state.seen.push(card.id);
   state.history.push({ id: card.id, side, day: state.day });
 }
 
@@ -81,7 +84,7 @@ export function isRisky(card, side) {
 // `onlyRisky` leaves out intended choices: appropriate steps cost crew or energy by design,
 // and listing them as "what led to this" would teach the opposite of what the card meant.
 export function topCauses(history, cards, meter, edge, { n = 2, onlyRisky = false } = {}) {
-  const byId = new Map(cards.map((c) => [c.id, c]));
+  const byId = cards instanceof Map ? cards : new Map(cards.map((c) => [c.id, c]));
   return history
     .map((h) => {
       const card = byId.get(h.id);
@@ -132,7 +135,7 @@ export function simulate(cards, policy, rng = Math.random, maxRetries = 20) {
   const falls = [];
   const played = new Set();
   let retries = 0;
-  while (state.day <= 4) {
+  while (state.day <= LAST_DAY) {
     state.checkpoint = snapshot(state);
     let fell = null;
     const usedToday = [];
@@ -152,7 +155,7 @@ export function simulate(cards, policy, rng = Math.random, maxRetries = 20) {
       restoreCheckpoint(state);
       continue;
     }
-    if (state.day < 4) startNextDay(state);
+    if (state.day < LAST_DAY) startNextDay(state);
     else state.day++;
   }
   return { ending: goodEndingId(state), falls, played };

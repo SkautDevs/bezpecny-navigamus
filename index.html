@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0d2235">
-  <title>Bezpečný Navigamus</title>
+  <meta name="theme-color" content="#1b0e44">
+  <title>Safe from Harm – Tréninková hra</title>
   <link rel="stylesheet" href="style.css">
+  <link id="event-theme" rel="stylesheet" href="themes/navigamus.css">
   <script type="module" src="js/game.js"></script>
 </head>
 <body>
@@ -14,22 +15,23 @@
     <!-- Intro -->
     <section id="screen-intro" class="screen" hidden>
       <div class="panel">
-        <p class="kicker">Navigamus 2027 · Hlučínské jezero</p>
-        <h1>Bezpečný Navigamus</h1>
-        <p>Tohle není test, ale trénink. Projdi čtyři dny Navigamu až do neděle a zjistíš, co na akci platí. Když některý ukazatel spadne nebo přeteče, den si prostě zopakuješ. Na konci dostaneš pečeť k registraci.</p>
+        <div id="event-switcher" class="event-switcher" role="group" aria-label="Výběr akce"></div>
+        <p class="kicker" id="intro-kicker"></p>
+        <h1 id="intro-title" tabindex="-1"></h1>
+        <p id="intro-body"></p>
         <p class="note">Kartu táhni doleva nebo doprava, nebo klepni na volbu.</p>
-        <p class="note">Na akci ti pomůžou: <b>SOS</b> (Skautská ochranná služba) kvůli bezpečí, <b>SZT</b> (Skautský záchranný tým) kvůli zdraví, <b>Uši pro duši</b>, když je těžko na duši, <b>infostan</b> a <b>registrace</b> s informacemi.</p>
+        <p class="note">Na akci ti pomůžou: <b>SOS</b> (Skautská ochranná služba) kvůli bezpečí, <b id="service-health">SZT</b> (Skautský záchranný tým) kvůli zdraví, <b>Uši pro duši</b>, když je těžko na duši, <b>infostan</b> a <b id="service-info">registrace s informacemi</b>.</p>
         <ul class="legend">
-          <li><span>🛡️</span> <b>Bezpečí</b> – jsou lidé kolem tebe v bezpečí</li>
-          <li><span>🤝</span> <b>Důvěra</b> – dá se za tebou přijít</li>
-          <li><span>👥</span> <b>Parta</b> – vztahy s ostatními</li>
-          <li><span>🔋</span> <b>Síly</b> – tvoje energie</li>
+          <li><span aria-hidden="true">🛡️</span> <b>Bezpečí</b> – jsou lidé kolem tebe v bezpečí</li>
+          <li><span aria-hidden="true">🤝</span> <b>Důvěra</b> – dá se za tebou přijít</li>
+          <li><span aria-hidden="true">👥</span> <b>Parta</b> – vztahy s ostatními</li>
+          <li><span aria-hidden="true">🔋</span> <b>Síly</b> – tvoje energie</li>
         </ul>
-        <p>Pozor: ani prázdný, ani přetékající ukazatel nevěstí nic dobrého.</p>
-        <p class="note">Hra obsahuje situace týkající se alkoholu, šikany, nevhodného chování a zneužívání. Pokud tě něco z toho tíží, zavolej na Skautskou krizovou linku 737 205 520 (nonstop) nebo napiš na poradna@skaut.cz.</p>
+        <p class="note">Pozor: ani prázdný, ani přetékající ukazatel nevěstí nic dobrého.</p>
+        <p class="note warning-note">Hra obsahuje situace týkající se alkoholu, šikany, nevhodného chování a zneužívání. Pokud tě něco z toho tíží, zavolej na Skautskou krizovou linku <a href="tel:+420737205520">737 205 520</a> (nonstop) nebo napiš na <a href="mailto:poradna@skaut.cz">poradna@skaut.cz</a>.</p>
         <div class="actions">
           <button id="btn-continue" class="primary" hidden></button>
-          <button id="btn-new" class="primary">Vyplout</button>
+          <button id="btn-new" class="primary"></button>
         </div>
         <p id="found-intro" class="found"></p>
       </div>
@@ -55,8 +57,8 @@
     <!-- Daily log -->
     <section id="screen-log" class="screen" hidden>
       <div class="panel">
-        <p class="kicker">Lodní deník</p>
-        <h2 id="log-title"></h2>
+        <p class="kicker" id="log-kicker"></p>
+        <h2 id="log-title" tabindex="-1"></h2>
         <ol id="log-list" class="log"></ol>
         <div class="actions"><button id="btn-log-next" class="primary"></button></div>
       </div>
@@ -65,21 +67,21 @@
     <!-- Ending (fall or good) -->
     <section id="screen-ending" class="screen" hidden>
       <div class="panel">
-        <p class="ending-icon" id="ending-icon"></p>
+        <p class="ending-icon" id="ending-icon" aria-hidden="true"></p>
         <p class="kicker" id="ending-kicker"></p>
-        <h2 id="ending-title"></h2>
+        <h2 id="ending-title" tabindex="-1"></h2>
         <p id="ending-text"></p>
         <p id="ending-near" class="near" hidden></p>
         <div id="ending-causes" class="causes" hidden>
-          <p class="kicker">Co k tomu vedlo</p>
+          <p class="subhead">Co k tomu vedlo</p>
           <ol id="causes-list" class="log"></ol>
         </div>
         <div class="debrief">
-          <p class="kicker">Na Navigamu platí</p>
+          <p class="subhead" id="ending-debrief-heading"></p>
           <p id="ending-debrief"></p>
         </div>
         <div id="seal" class="seal" hidden>
-          <p class="kicker">Pečeť Bezpečného Navigamu</p>
+          <p class="subhead" id="seal-title"></p>
           <p class="seal-code" id="seal-code"></p>
           <p class="note">Kód si ulož – budeš ho potřebovat při registraci.</p>
         </div>

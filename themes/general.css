@@ -1,0 +1,77 @@
+/* Obecný (Junák / kissj default) custom overload — aligned with kissj.net/styles.css */
+@font-face {
+  font-family: 'themix';
+  src: url('https://cdn.skauting.cz/fonts/TheMix_LT_400.woff2') format('woff2'),
+       url('https://cdn.skauting.cz/fonts/TheMix_LT_400.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'themix';
+  src: url('https://cdn.skauting.cz/fonts/TheMix_LT_700.woff2') format('woff2'),
+       url('https://cdn.skauting.cz/fonts/TheMix_LT_700.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'skautbold';
+  src: url('https://cdn.skauting.cz/fonts/skaut-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-heading: 'skautbold', 'themix', system-ui, sans-serif;
+  --font-body: 'themix', system-ui, -apple-system, sans-serif;
+  --heading-transform: none;
+  --heading-tracking: normal;
+  --heading-weight: 400;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ffffff;
+    --bg-pattern: url('https://kissj.net/background_mozaika_light.svg');
+    --surface: #f9f9f9;
+    --surface-alt: #ebf2f5;
+    --ink: #294885;
+    --ink-soft: #636363;
+    --brand: #255C9E;
+    --brand-contrast: #ffffff;
+    --accent: #B85637;
+    --accent-contrast: #ffffff;
+    --fading: #d4e2f0;
+    --danger: #B85637;
+    --shadow: 1px 1px 1px rgb(0 0 0 / 0.3);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1426;
+    --bg-pattern: url('https://kissj.net/background_mozaika_dark.svg');
+    --surface: #14203a;
+    --surface-alt: #1c2a47;
+    --ink: #BDD4DF;
+    --ink-soft: #8aa5b8;
+    --brand: #6B96CA;
+    --brand-contrast: #0b1426;
+    --accent: #F9B200;
+    --accent-contrast: #0b1426;
+    --fading: #294885;
+    --danger: #e27365;
+    --shadow: 1px 1px 1px rgb(0 0 0 / 0.3);
+  }
+}
+
+.panel, .card {
+  border: none;
+  border-radius: 6px;
+  box-shadow: 1px 1px 1px rgb(0 0 0 / 0.3);
+}

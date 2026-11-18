@@ -23,11 +23,15 @@
     .choice .effect { margin-left: 10px; font-size: 0.9rem; color: #555; white-space: nowrap; }
     .choice .flag { margin-left: 10px; font-size: 0.8rem; color: #6a1b9a; }
     .log { font-size: 0.9rem; color: #555; background: #f4ead5; padding: 6px 10px; border-radius: 6px; margin: 6px 0 0; }
+    .switcher { display: flex; gap: 8px; margin: 12px 0; }
+    .switcher button { padding: 6px 14px; border-radius: 999px; border: 1px solid #c9a24a; background: #fff; cursor: pointer; font: inherit; }
+    .switcher button.active { background: #0d2235; color: #fff; border-color: #0d2235; }
   </style>
   <script type="module" src="js/check.js"></script>
 </head>
 <body>
   <h1>Kontrola karet</h1>
+  <div id="event-switcher" class="switcher"></div>
   <p id="summary">Načítám…</p>
   <h2>Chyby</h2>
   <div id="errors"></div>

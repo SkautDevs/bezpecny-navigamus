@@ -1,35 +1,31 @@
-// Game UI: screens, swipe handling, persistence. Rules live in engine.js.
+// Game UI: screens, event skinning, swipe handling, persistence. Rules live in engine.js.
 import {
-  METERS, SLOTS, GOOD_RANGE, newState, snapshot, restoreCheckpoint, drawSlot,
+  METERS, SLOTS, LAST_DAY, GOOD_RANGE, newState, snapshot, restoreCheckpoint, drawSlot,
   applyChoice, checkFall, fallEndingId, goodEndingId, startNextDay, isRisky, topCauses,
 } from './engine.js';
+import {
+  EVENTS, resolveEvent, DAY_NAMES, DAY_NAMES_ACC, SLOT_NAMES, SLOT_ICONS,
+  METER_ICONS, METER_NAMES,
+} from './events.js';
+import { $, el, setEventParam } from './dom.js';
 
-const DAY_NAMES = { 1: 'Čtvrtek', 2: 'Pátek', 3: 'Sobota', 4: 'Neděle' };
-const DAY_NAMES_ACC = { 1: 'čtvrtek', 2: 'pátek', 3: 'sobotu', 4: 'neděli' };
-const SLOT_NAMES = { morning: 'Ráno', afternoon: 'Odpoledne', evening: 'Večer', night: 'Noc' };
-const SLOT_ICONS = { morning: '🌅', afternoon: '☀️', evening: '🌇', night: '🌙' };
-const METER_ICONS = { safety: '🛡️', trust: '🤝', crew: '👥', energy: '🔋' };
-const METER_NAMES = { safety: 'Bezpečí', trust: 'Důvěra', crew: 'Parta', energy: 'Síly' };
 const SWIPE_THRESHOLD = 90; // px of horizontal drag that commits a choice
-const STORAGE_STATE = 'sfh-state';
-const STORAGE_ENDINGS = 'sfh-endings';
-const STORAGE_SEAL = 'sfh-seal';
 
-const $ = (id) => document.getElementById(id);
-
+let activeEvent = resolveEvent();
 let cards = [];
+let cardsById = new Map();
 let endings = [];
 let state = null;
-// Per-day runtime, rebuilt whenever a day (re)starts.
 let slotIndex = 0;
 let queue = [];
 let current = null;
+let presented = null; // { left: 'left'|'right', right: 'left'|'right' } mapping shown side -> data side
 let usedToday = [];
-let dayLog = [];
 let busy = false;
-// Sides are randomly mirrored per card so players can't learn "right is always the good one".
-let mirrored = false;
-const actual = (shownSide) => (mirrored ? (shownSide === 'left' ? 'right' : 'left') : shownSide);
+
+function storageKey(suffix) {
+  return `sfh:${activeEvent.id}:${suffix}`;
+}
 
 // ---------- storage (best effort: private mode may throw) ----------
 
@@ -51,29 +47,93 @@ function save(key, value) {
 }
 
 function markEndingFound(id) {
-  const found = load(STORAGE_ENDINGS, []);
-  if (!found.includes(id)) save(STORAGE_ENDINGS, [...found, id]);
+  const key = storageKey('endings');
+  const found = load(key, []);
+  if (!found.includes(id)) save(key, [...found, id]);
 }
 
 function foundText() {
-  const found = load(STORAGE_ENDINGS, []);
+  const found = load(storageKey('endings'), []);
   return found.length ? `Objevené konce: ${found.length} / ${endings.length}` : '';
+}
+
+// ---------- event loading & skinning ----------
+
+function applyEventChrome(ev) {
+  document.title = ev.title;
+  $('event-theme').href = ev.css;
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) themeMeta.content = ev.themeColor;
+
+  $('intro-kicker').textContent = ev.kicker;
+  $('intro-title').textContent = ev.title;
+  $('intro-body').textContent = ev.intro;
+  $('service-health').textContent = ev.healthTeam;
+  $('service-info').textContent = ev.infoTeam;
+  $('log-kicker').textContent = ev.logKicker;
+  $('ending-debrief-heading').textContent = ev.debriefHeading;
+  $('seal-title').textContent = ev.sealTitle;
+}
+
+function renderEventSwitcher() {
+  const box = $('event-switcher');
+  box.replaceChildren();
+  for (const ev of Object.values(EVENTS)) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'event-pill' + (ev.id === activeEvent.id ? ' active' : '');
+    btn.textContent = ev.label;
+    btn.setAttribute('aria-pressed', String(ev.id === activeEvent.id));
+    btn.onclick = () => switchEvent(ev.id);
+    box.append(btn);
+  }
+}
+
+async function loadEventData(ev) {
+  const [nextCards, nextEndings] = await Promise.all([
+    fetch(ev.cards).then((r) => r.json()),
+    fetch(ev.endings).then((r) => r.json()),
+  ]);
+  activeEvent = ev;
+  cards = nextCards;
+  endings = nextEndings;
+  cardsById = new Map(cards.map((c) => [c.id, c]));
+  applyEventChrome(ev);
+  renderEventSwitcher();
+}
+
+async function switchEvent(id) {
+  if (id === activeEvent.id || !EVENTS[id]) return;
+  await loadEventData(EVENTS[id]);
+  setEventParam(id);
+  showIntro();
 }
 
 // ---------- screens ----------
 
 function show(name) {
   for (const s of document.querySelectorAll('.screen')) s.hidden = s.id !== `screen-${name}`;
+  const focusTarget = {
+    intro: $('intro-title'),
+    game: $('card'),
+    log: $('log-title'),
+    ending: $('ending-title'),
+  }[name];
+  if (focusTarget) focusTarget.focus({ preventScroll: true });
 }
 
 function showIntro() {
-  const saved = load(STORAGE_STATE, null);
-  const btn = $('btn-continue');
-  btn.hidden = !saved;
+  const saved = load(storageKey('state'), null);
+  const btnContinue = $('btn-continue');
+  const btnNew = $('btn-new');
+  btnContinue.hidden = !saved;
   if (saved) {
-    btn.textContent = `Pokračovat (${DAY_NAMES_ACC[saved.checkpoint.day]})`;
-    $('btn-new').textContent = 'Začít znovu';
-    $('btn-new').classList.remove('primary');
+    btnContinue.textContent = `Pokračovat (${DAY_NAMES_ACC[saved.checkpoint.day]})`;
+    btnNew.textContent = 'Začít znovu';
+    btnNew.classList.remove('primary');
+  } else {
+    btnNew.textContent = activeEvent.ctaStart;
+    btnNew.classList.add('primary');
   }
   $('found-intro').textContent = foundText();
   show('intro');
@@ -85,19 +145,29 @@ function renderMeters() {
   const box = $('meters');
   if (!box.children.length) {
     for (const m of METERS) {
-      const el = document.createElement('div');
-      el.className = 'meter';
-      el.dataset.meter = m;
-      el.title = METER_NAMES[m];
-      el.innerHTML = `<span class="gauge"><span class="fill"></span><span class="icon">${METER_ICONS[m]}</span></span><span class="dot"></span>`;
-      box.append(el);
+      const meter = el('div', 'meter');
+      meter.dataset.meter = m;
+      meter.title = METER_NAMES[m];
+      meter.setAttribute('role', 'meter');
+      meter.setAttribute('aria-label', METER_NAMES[m]);
+      meter.setAttribute('aria-valuemin', '0');
+      meter.setAttribute('aria-valuemax', '100');
+      const gauge = el('span', 'gauge');
+      const icon = el('span', 'icon', METER_ICONS[m]);
+      icon.setAttribute('aria-hidden', 'true');
+      gauge.append(el('span', 'fill'), icon);
+      const dot = el('span', 'dot');
+      dot.setAttribute('aria-hidden', 'true');
+      meter.append(gauge, dot);
+      box.append(meter);
     }
   }
   for (const m of METERS) {
-    const el = box.querySelector(`[data-meter="${m}"]`);
+    const meter = box.querySelector(`[data-meter="${m}"]`);
     const v = state.meters[m];
-    el.querySelector('.fill').style.height = `${v}%`;
-    el.classList.toggle('danger', v <= 15 || v >= 85);
+    meter.setAttribute('aria-valuenow', String(v));
+    meter.querySelector('.fill').style.height = `${v}%`;
+    meter.classList.toggle('danger', v <= 15 || v >= 85);
   }
 }
 
@@ -114,10 +184,9 @@ function previewEffect(effect) {
 
 function startDay() {
   state.checkpoint = snapshot(state);
-  save(STORAGE_STATE, state);
+  save(storageKey('state'), state);
   slotIndex = 0;
   usedToday = [];
-  dayLog = [];
   queue = drawSlot(cards, state.day, SLOTS[0], state.flags, usedToday);
   show('game');
   renderMeters();
@@ -132,13 +201,15 @@ function nextCard() {
   }
   current = queue.shift();
   usedToday.push(current.id);
-  mirrored = Math.random() < 0.5;
+  const flip = Math.random() < 0.5;
+  presented = flip ? { left: 'right', right: 'left' } : { left: 'left', right: 'right' };
   renderWhen();
   $('character').textContent = current.character || '';
   $('text').textContent = current.text;
-  $('btn-left').textContent = current[actual('left')].label;
-  $('btn-right').textContent = current[actual('right')].label;
+  $('btn-left').textContent = current[presented.left].label;
+  $('btn-right').textContent = current[presented.right].label;
   $('choice-hint').textContent = '';
+  $('choice-hint').className = 'choice-hint';
   const card = $('card');
   card.style.transform = '';
   card.classList.remove('leaving');
@@ -148,21 +219,16 @@ function nextCard() {
   busy = false;
 }
 
-// `shownSide` is the side the player swiped or clicked; it maps to the card's data side via actual().
 // Day name plus a strip of the four parts of the day; the current one is highlighted.
 function renderWhen() {
   const when = $('when');
   when.replaceChildren();
-  const day = document.createElement('span');
-  day.className = 'day';
-  day.textContent = DAY_NAMES[state.day];
-  const strip = document.createElement('span');
-  strip.className = 'slots';
+  const day = el('span', 'day', DAY_NAMES[state.day]);
+  const strip = el('span', 'slots');
   SLOTS.forEach((s, i) => {
-    const pill = document.createElement('span');
-    pill.className = 'slot' + (i === slotIndex ? ' now' : i < slotIndex ? ' done' : '');
+    const pill = el('span', 'slot' + (i === slotIndex ? ' now' : i < slotIndex ? ' done' : ''));
     pill.title = SLOT_NAMES[s];
-    pill.innerHTML = `<span class="icon">${SLOT_ICONS[s]}</span><span class="label">${SLOT_NAMES[s]}</span>`;
+    pill.append(el('span', 'icon', SLOT_ICONS[s]), el('span', 'label', SLOT_NAMES[s]));
     strip.append(pill);
   });
   when.append(day, strip);
@@ -171,13 +237,11 @@ function renderWhen() {
 function choose(shownSide) {
   if (busy || !current) return;
   busy = true;
-  const side = actual(shownSide);
+  const side = presented[shownSide];
   const card = $('card');
   card.classList.add('leaving');
   card.style.transform = `translateX(${shownSide === 'left' ? -150 : 150}%) rotate(${shownSide === 'left' ? -20 : 20}deg)`;
   applyChoice(state, current, side);
-  if (!state.seen.includes(current.id)) state.seen.push(current.id);
-  dayLog.push({ card: current, side });
   previewEffect(null);
   renderMeters();
   const fall = checkFall(state.meters);
@@ -188,18 +252,19 @@ function showLog() {
   $('log-title').textContent = DAY_NAMES[state.day];
   const list = $('log-list');
   list.replaceChildren();
-  for (const { card, side } of dayLog) {
-    const comment = (card[side].logChoice) || card.log;
+  for (const h of state.history) {
+    if (h.day !== state.day) continue;
+    const card = cardsById.get(h.id);
+    if (!card) continue;
+    const comment = card[h.side].logChoice || card.log;
     // Risky choices are listed even without a comment, so the player sees where to take a second look.
-    if (!comment && !isRisky(card, side)) continue;
-    list.append(logItem(card, side, comment, false));
+    if (!comment && !isRisky(card, h.side)) continue;
+    list.append(logItem(card, h.side, comment, false));
   }
   if (!list.children.length) {
-    const li = document.createElement('li');
-    li.textContent = 'Klidný den, nic k zápisu.';
-    list.append(li);
+    list.append(el('li', '', 'Klidný den, nic k zápisu.'));
   }
-  $('btn-log-next').textContent = state.day < 4 ? `Pokračovat na ${DAY_NAMES_ACC[state.day + 1]}` : 'Doplout do přístavu';
+  $('btn-log-next').textContent = state.day < LAST_DAY ? `Pokračovat na ${DAY_NAMES_ACC[state.day + 1]}` : activeEvent.logFinish;
   show('log');
 }
 
@@ -208,22 +273,10 @@ function logItem(card, side, comment, withContext) {
   const li = document.createElement('li');
   const risky = isRisky(card, side);
   li.classList.toggle('risky', risky);
-  if (withContext) {
-    const ctx = document.createElement('p');
-    ctx.className = 'log-context';
-    ctx.textContent = card.text;
-    li.append(ctx);
-  }
-  const choice = document.createElement('p');
-  choice.className = 'log-choice';
-  choice.textContent = `${risky ? '⚠️ ' : ''}${card.character ? card.character + ': ' : ''}${card[side].label}`;
-  li.append(choice);
-  if (comment) {
-    const p = document.createElement('p');
-    p.className = 'log-comment';
-    p.textContent = comment;
-    li.append(p);
-  }
+  if (withContext) li.append(el('p', 'log-context', card.text));
+  const prefix = `${risky ? '⚠️ ' : ''}${card.character ? `${card.character}: ` : ''}`;
+  li.append(el('p', 'log-choice', `${prefix}${card[side].label}`));
+  if (comment) li.append(el('p', 'log-comment', comment));
   return li;
 }
 
@@ -231,7 +284,7 @@ function logItem(card, side, comment, withContext) {
 function renderCauses(history, meter, edge, onlyRisky = false) {
   const list = $('causes-list');
   list.replaceChildren();
-  const causes = topCauses(history, cards, meter, edge, { onlyRisky });
+  const causes = topCauses(history, cardsById, meter, edge, { onlyRisky });
   for (const { card, side } of causes) {
     list.append(logItem(card, side, card[side].logChoice || card.log, true));
   }
@@ -259,7 +312,7 @@ function nearEdges() {
 }
 
 function afterLog() {
-  if (state.day < 4) {
+  if (state.day < LAST_DAY) {
     startNextDay(state);
     startDay();
   } else {
@@ -267,52 +320,63 @@ function afterLog() {
   }
 }
 
-function showEnding(id) {
-  const e = endings.find((x) => x.id === id);
-  markEndingFound(id);
-  $('ending-icon').textContent = e.icon;
-  $('ending-kicker').textContent = e.kind === 'fall' ? `Pád · ${DAY_NAMES[state.day]}` : 'Konec plavby';
-  $('ending-title').textContent = e.title;
-  $('ending-text').textContent = e.text;
-  $('ending-debrief').textContent = e.debrief;
+function renderEndingDetails(e) {
   const near = $('ending-near');
   near.hidden = true;
   $('ending-causes').hidden = true;
   if (e.kind === 'fall') {
-    const [meter, edge] = id.split('-');
+    const [meter, edge] = e.id.split('-');
     renderCauses(state.history.filter((h) => h.day === state.day), meter, Number(edge));
-  } else if (id === 'scarred-harbor') {
+  } else if (e.id === 'scarred-harbor') {
     const edges = nearEdges();
-    const blamed = new Set(edges.filter((x) => topCauses(state.history, cards, x.meter, x.edge, { onlyRisky: true }).length).map((x) => x.meter));
+    const blamed = new Set(
+      edges.filter((x) => topCauses(state.history, cardsById, x.meter, x.edge, { onlyRisky: true }).length).map((x) => x.meter),
+    );
     near.textContent = edges.map((x) => nearSentence(x, blamed.has(x.meter))).join('\n');
     near.hidden = !edges.length;
     const worst = edges.find((x) => blamed.has(x.meter));
     if (worst) renderCauses(state.history, worst.meter, worst.edge, true);
   }
-  const sealBox = $('seal');
-  sealBox.hidden = e.kind !== 'good';
+}
+
+function renderEndingActions(e) {
+  $('seal').hidden = e.kind !== 'good';
+  const btn = $('btn-ending-next');
   if (e.kind === 'good') {
     $('seal-code').textContent = sealCode();
-    try { localStorage.removeItem(STORAGE_STATE); } catch { /* ignore */ }
-    $('btn-ending-next').textContent = 'Hrát znovu a hledat další konce';
-    $('btn-ending-next').onclick = () => { state = newState(); startDay(); };
+    try { localStorage.removeItem(storageKey('state')); } catch { /* ignore */ }
+    btn.textContent = 'Hrát znovu a hledat další konce';
+    btn.onclick = () => { state = newState(); startDay(); };
   } else {
-    $('btn-ending-next').textContent = `Zkusit ${DAY_NAMES_ACC[state.day]} znovu`;
-    $('btn-ending-next').onclick = () => { restoreCheckpoint(state); startDay(); };
+    btn.textContent = `Zkusit ${DAY_NAMES_ACC[state.day]} znovu`;
+    btn.onclick = () => { restoreCheckpoint(state); startDay(); };
   }
+}
+
+function showEnding(id) {
+  const e = endings.find((x) => x.id === id);
+  markEndingFound(id);
+  $('ending-icon').textContent = e.icon;
+  $('ending-kicker').textContent = e.kind === 'fall' ? `Pád · ${DAY_NAMES[state.day]}` : 'Konec akce';
+  $('ending-title').textContent = e.title;
+  $('ending-text').textContent = e.text;
+  $('ending-debrief').textContent = e.debrief;
+  renderEndingDetails(e);
+  renderEndingActions(e);
   $('found-ending').textContent = foundText();
   show('ending');
 }
 
 // TODO: personal, verifiable code once registration integration is decided (see DESIGN.md, Otevřené body).
 function sealCode() {
-  let code = load(STORAGE_SEAL, null);
+  const key = storageKey('seal');
+  let code = load(key, null);
   if (!code) {
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     const bytes = crypto.getRandomValues(new Uint8Array(8));
     const chars = [...bytes].map((b) => alphabet[b % alphabet.length]).join('');
-    code = `NAV27-${chars.slice(0, 4)}-${chars.slice(4)}`;
-    save(STORAGE_SEAL, code);
+    code = `${activeEvent.sealPrefix}-${chars.slice(0, 4)}-${chars.slice(4)}`;
+    save(key, code);
   }
   return code;
 }
@@ -336,10 +400,10 @@ function setupSwipe() {
     if (startX === null) return;
     dx = ev.clientX - startX;
     card.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`;
-    const side = dx < -20 ? 'left' : dx > 20 ? 'right' : null;
-    $('choice-hint').textContent = side ? current[actual(side)].label : '';
-    $('choice-hint').className = 'choice-hint' + (side ? ` ${side}` : '');
-    previewEffect(side ? current[actual(side)].effect : null);
+    const shownSide = dx < -20 ? 'left' : dx > 20 ? 'right' : null;
+    $('choice-hint').textContent = shownSide ? current[presented[shownSide]].label : '';
+    $('choice-hint').className = 'choice-hint' + (shownSide ? ` ${shownSide}` : '');
+    previewEffect(shownSide ? current[presented[shownSide]].effect : null);
   });
 
   const end = () => {
@@ -351,16 +415,17 @@ function setupSwipe() {
     } else {
       card.style.transform = '';
       $('choice-hint').textContent = '';
+      $('choice-hint').className = 'choice-hint';
       previewEffect(null);
     }
   };
   card.addEventListener('pointerup', end);
   card.addEventListener('pointercancel', end);
 
-  for (const side of ['left', 'right']) {
-    const btn = $(`btn-${side}`);
-    btn.addEventListener('click', () => choose(side));
-    const preview = () => current && previewEffect(current[actual(side)].effect);
+  for (const shownSide of ['left', 'right']) {
+    const btn = $(`btn-${shownSide}`);
+    btn.addEventListener('click', () => choose(shownSide));
+    const preview = () => current && presented && previewEffect(current[presented[shownSide]].effect);
     btn.addEventListener('pointerenter', preview);
     btn.addEventListener('focus', preview);
     btn.addEventListener('pointerleave', () => previewEffect(null));
@@ -377,16 +442,12 @@ function setupSwipe() {
 // ---------- boot ----------
 
 async function boot() {
-  [cards, endings] = await Promise.all([
-    fetch('data/cards.json').then((r) => r.json()),
-    fetch('data/endings.json').then((r) => r.json()),
-  ]);
+  await loadEventData(activeEvent);
   setupSwipe();
   $('btn-new').onclick = () => { state = newState(); startDay(); };
   $('btn-continue').onclick = () => {
-    // Resume exactly where the day started (no clamping, unlike a retry after a fall).
-    state = { ...newState(), ...load(STORAGE_STATE, null) }; // newState() supplies fields older saves lack
-    Object.assign(state, structuredClone(state.checkpoint));
+    state = { ...newState(), ...load(storageKey('state'), null) };
+    restoreCheckpoint(state, { penalty: false });
     startDay();
   };
   $('btn-log-next').onclick = afterLog;
