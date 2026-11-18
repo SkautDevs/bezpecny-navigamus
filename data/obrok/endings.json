@@ -1,0 +1,98 @@
+[
+  {
+    "id": "safety-0",
+    "kind": "fall",
+    "icon": "🛡️",
+    "title": "Konec hry – podceněné signály",
+    "text": "Signálů bylo víc. Každý zvlášť vypadal jako maličkost, a tak se nikdo neozval. Až bylo pozdě.",
+    "debrief": "Bezpečí stojí na spoustě malých „všimnu si a řeknu to dál“. Nemusíš nic řešit sám ani sama – stačí to předat SOS, Uším pro duši nebo SZT.",
+    "near": "🛡️ Bezpečí bylo na konci skoro na dně – několik signálů zůstalo bez odezvy."
+  },
+  {
+    "id": "safety-100",
+    "kind": "fall",
+    "icon": "🛡️",
+    "title": "Přehnaná kontrola",
+    "text": "Každý přestupek hlášen, každá kytara po desáté zabavena. Pořádek dokonalý – a ostatní se za tebou přestali otáčet.",
+    "debrief": "Bezpečí není totéž co kontrola. Přiměřená reakce je silnější než ta nejpřísnější – lidé se pak svěří i s tím podstatným.",
+    "near": "🛡️ Bezpečí přetékalo – reakce byly často přísnější, než situace potřebovala."
+  },
+  {
+    "id": "trust-0",
+    "kind": "fall",
+    "icon": "🤝",
+    "title": "Zavřené dveře",
+    "text": "Něco se dělo. Nikdo s tím ale nepřišel, a tak ses to nedozvěděl ani nedozvěděla.",
+    "debrief": "Když někdo přijde s problémem, nejdřív vyslechni, nezlehčuj a neslibuj mlčení. Pomoc pak hledejte společně, třeba u Uší pro duši.",
+    "near": "🤝 Důvěra byla skoro na dně – několikrát se někdo setkal se zlehčením místo vyslechnutí."
+  },
+  {
+    "id": "trust-100",
+    "kind": "fall",
+    "icon": "🤝",
+    "title": "Bez hranic",
+    "text": "Všichni ti všechno říkají, s každým jsi za jedno. Když ale bylo potřeba udělat nepopulární krok, už to nešlo.",
+    "debrief": "Dospělý na akci má i odpovědnost. Kodex jednání dospělých říká, kde jsou hranice – a právě ty umožňují opravdu pomoct.",
+    "near": "🤝 Důvěra přetékala – hranice mezi kamarádem a dospělým s odpovědností se několikrát rozmazala."
+  },
+  {
+    "id": "crew-0",
+    "kind": "fall",
+    "icon": "👥",
+    "title": "Nikdo se nepřidá",
+    "text": "Na každou chybu přišla výtka. Když bylo potřeba pomoct, nikdo se nepřidal.",
+    "debrief": "Na problém jde upozornit věcně, v klidu a s respektem – a když to nejde, předat ho SOS. Ostatní jsou oči a uši, které na akci potřebuješ.",
+    "near": "👥 Parta byla skoro na dně – výtek bylo víc než domluvy."
+  },
+  {
+    "id": "crew-100",
+    "kind": "fall",
+    "icon": "👥",
+    "title": "Krytí party",
+    "text": "Parta drží spolu. I když to, co se krylo, už dávno nebyla legrace.",
+    "debrief": "Loajalita ke kamarádům nesmí být nad bezpečím ostatních. Ozvat se, když kamarád překračuje hranice, není zrada.",
+    "near": "👥 Parta přetékala – několikrát dostala přednost před tím, co bylo potřeba říct nahlas."
+  },
+  {
+    "id": "energy-0",
+    "kind": "fall",
+    "icon": "🔋",
+    "title": "Bez spánku",
+    "text": "Čtvrtá ráno, třetí energy drink, nulový spánek. A pak chyba, která by se odpočatému nestala.",
+    "debrief": "Starat se o sebe je taky odpovědnost: unavený člověk přehlédne, co by jinak viděl. Uši pro duši a SZT jsou tu i pro tebe.",
+    "near": "🔋 Síly byly skoro na dně – odpočinek šel několikrát stranou."
+  },
+  {
+    "id": "energy-100",
+    "kind": "fall",
+    "icon": "🔋",
+    "title": "Prospaný Obrok",
+    "text": "Odpočinek, klid, bez jediného konfliktu. Taky proto, že se nic neřešilo.",
+    "debrief": "Akce je bezpečná jen tehdy, když se dívají všichni. Nemusíš být hrdina – stačí si všimnout a říct to dál.",
+    "near": "🔋 Síly přetékaly – několik situací zůstalo bez zapojení."
+  },
+  {
+    "id": "safe-harbor",
+    "kind": "good",
+    "icon": "🔥",
+    "title": "Bezpečný Obrok",
+    "text": "Čtyři dny, stovky lidí a ty jsi u toho byl nebo byla – s otevřenýma očima, s respektem a s rozumem.",
+    "debrief": "Všímat si, reagovat přiměřeně, vědět kam se obrátit a nezapomenout na sebe. Uvidíme se na Obroku!"
+  },
+  {
+    "id": "scarred-harbor",
+    "kind": "good",
+    "icon": "🔥",
+    "title": "Návrat s šrámy",
+    "text": "Obrok jsi dokončil nebo dokončila. Bylo to trochu pocuchané, ale vcelku.",
+    "debrief": "Všímat si, reagovat přiměřeně, vědět kam se obrátit a nezapomenout na sebe. Na skutečné akci si pohlídej hlavně to, co bylo blízko kraje."
+  },
+  {
+    "id": "helmsman",
+    "kind": "good",
+    "icon": "⚡",
+    "title": "Roverský tahoun",
+    "text": "Čtyři dny bez jediného pádu a v každé důležité chvíli správný kurz. Tajný konec je tvůj.",
+    "debrief": "Na skutečné akci se chybám nevyhne nikdo – ale víš, čeho si všímat, jak reagovat přiměřeně a kam se obrátit. Přesně takové lidi Obrok potřebuje."
+  }
+]
