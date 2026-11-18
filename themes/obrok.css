@@ -1,0 +1,103 @@
+/* Obrok 2027 custom overload — aligned with kissj.net/eventSpecificCss/stylesObrok27.css */
+@font-face {
+  font-family: 'montserrat-obrok';
+  src: url('fonts/Montserrat-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'themix-obrok';
+  src: url('https://cdn.skauting.cz/fonts/TheMix_LT_400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --o27-dark: #15133F;
+  --o27-purple: #4D2F90;
+  --o27-green: #E0FF00;
+  --o27-orange: #FF5733;
+  --font-heading: 'montserrat-obrok', system-ui, sans-serif;
+  --font-body: 'themix-obrok', system-ui, sans-serif;
+  --heading-transform: uppercase;
+  --heading-tracking: 0.02em;
+  --heading-weight: 800;
+  --radius: 4px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #F1F1F4;
+    --surface: #FFFFFF;
+    --surface-alt: #EBEAF2;
+    --ink: #15133F;
+    --ink-soft: #3C3866;
+    --brand: #15133F;
+    --brand-contrast: #FFFFFF;
+    --accent: #D93814;
+    --accent-contrast: #FFFFFF;
+    --fading: #D8D5E8;
+    --danger: #D93814;
+    --shadow: 5px 5px 0 #15133F;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15133F;
+    --surface: #201D54;
+    --surface-alt: #28264E;
+    --ink: #FFFFFF;
+    --ink-soft: #C9C4E8;
+    --brand: #E0FF00;
+    --brand-contrast: #15133F;
+    --accent: #FF5733;
+    --accent-contrast: #15133F;
+    --fading: #4D2F90;
+    --danger: #FF5733;
+    --shadow: 5px 5px 0 #4D2F90;
+  }
+}
+
+/* Obrok 2027 polygonal cards from kissj.net/eventSpecificCss/stylesObrok27.css */
+.panel, .card {
+  --o27-card-shape: polygon(6px 0, 100% 4px, calc(100% - 3px) calc(100% - 7px), 0 100%);
+  position: relative;
+  isolation: isolate;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--brand);
+  clip-path: var(--o27-card-shape);
+}
+
+.panel::before, .card::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  background: var(--surface);
+  clip-path: var(--o27-card-shape);
+}
+
+.choice-hint {
+  border-radius: 0;
+}
+
+button.primary {
+  background: var(--o27-green);
+  color: var(--o27-dark);
+  border-color: var(--o27-dark);
+}
+
+@media (hover: hover) {
+  button:hover { transform: scale(1.03) rotate(-1deg); }
+  button:nth-child(even):hover { transform: scale(1.03) rotate(1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:hover, button:nth-child(even):hover { transform: none; }
+}
