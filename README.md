@@ -14,7 +14,9 @@ server, protože z `file://` prohlížeč nenačte JS moduly ani karty.
 python3 -m http.server 8000
 ```
 
-Pak otevři http://localhost:8000/ (hra) nebo http://localhost:8000/check.html
+Pak otevři http://localhost:8000/ (výběr akce), konkrétní akci jako
+http://localhost:8000/navigamus/, http://localhost:8000/obrok/,
+http://localhost:8000/general/, nebo http://localhost:8000/check.html
 (kontrola karet).
 
 ## Veřejná verze
@@ -28,9 +30,11 @@ aktualizuje, nic dalšího se nespouští.
 | --- | --- |
 | `data/cards.json` | Všech 100 karet: texty, volby, dopady, zápisy do deníku |
 | `data/endings.json` | Konce hry: pády, dobré konce, tajný Kormidelník |
-| `index.html`, `style.css` | Obrazovky a vzhled hry |
+| `index.html`, `js/hub.js` | Rozcestník akcí v kořeni projektu |
+| `navigamus/`, `obrok/`, `general/` | Samostatné cesty pro jednotlivé akce |
+| `style.css`, `themes/` | Základní vzhled a motivy jednotlivých akcí |
 | `js/engine.js` | Pravidla hry bez UI: ukazatele, balíček, konce |
-| `js/game.js` | Ovládání a vykreslování hry |
+| `js/game.js`, `js/events.js` | Ovládání, vykreslování hry a konfigurace akcí |
 | `check.html`, `js/check.js` | Validace karet, simulace 2000 her a čitelný scénář pro sekci |
 | `DESIGN.md` | Návrh hry, pravidla psaní karet, schéma karty, otevřené body |
 
