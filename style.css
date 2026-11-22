@@ -98,7 +98,7 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .legend li { margin: 0.25em 0; }
 .legend span { display: inline-block; width: 1.5em; }
 
-/* ---------- event switcher (root hub) & back link ---------- */
+/* ---------- event switcher (root hub) ---------- */
 
 .event-list {
   display: flex;
@@ -150,20 +150,6 @@ a { color: var(--brand); text-underline-offset: 2px; }
   font-size: 0.82rem;
   color: var(--ink-soft);
   margin-top: 4px;
-}
-
-.back-link {
-  display: inline-block;
-  margin-bottom: 10px;
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-  text-decoration: none;
-}
-
-.back-link:hover {
-  color: var(--brand);
-  text-decoration: underline;
 }
 
 /* ---------- buttons ---------- */

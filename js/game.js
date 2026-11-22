@@ -66,7 +66,6 @@ function mountShell() {
     <!-- Intro -->
     <section id="screen-intro" class="screen" hidden>
       <div class="panel">
-        <a href="../" class="back-link">← Změnit akci</a>
         <p class="kicker" id="intro-kicker"></p>
         <h1 id="intro-title" tabindex="-1"></h1>
         <p id="intro-body"></p>
