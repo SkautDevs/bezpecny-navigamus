@@ -13,6 +13,8 @@ export const TOPICS = [
   'smoking', 'self-care', 'code-of-conduct', 'respect',
 ];
 
+const asset = (path) => new URL(`../${path}`, import.meta.url).href;
+
 export const EVENTS = {
   navigamus: {
     id: 'navigamus',
@@ -29,9 +31,10 @@ export const EVENTS = {
     sealTitle: 'Pečeť Bezpečného Navigamu',
     sealPrefix: 'NAV27',
     themeColor: '#1b0e44',
-    css: 'themes/navigamus.css',
-    cards: 'data/cards.json',
-    endings: 'data/endings.json',
+    accentColor: '#c92039',
+    css: asset('themes/navigamus.css'),
+    cards: asset('data/cards.json'),
+    endings: asset('data/endings.json'),
   },
   obrok: {
     id: 'obrok',
@@ -48,9 +51,10 @@ export const EVENTS = {
     sealTitle: 'Pečeť Bezpečného Obroku',
     sealPrefix: 'OBR27',
     themeColor: '#15133F',
-    css: 'themes/obrok.css',
-    cards: 'data/cards.json',
-    endings: 'data/obrok/endings.json',
+    accentColor: '#D93814',
+    css: asset('themes/obrok.css'),
+    cards: asset('data/cards.json'),
+    endings: asset('data/obrok/endings.json'),
   },
   general: {
     id: 'general',
@@ -67,15 +71,30 @@ export const EVENTS = {
     sealTitle: 'Pečeť Bezpečné akce',
     sealPrefix: 'SFH',
     themeColor: '#255C9E',
-    css: 'themes/general.css',
-    cards: 'data/cards.json',
-    endings: 'data/general/endings.json',
+    accentColor: '#B85637',
+    css: asset('themes/general.css'),
+    cards: asset('data/cards.json'),
+    endings: asset('data/general/endings.json'),
   },
 };
 
 export const DEFAULT_EVENT_ID = 'navigamus';
 
-export function resolveEvent(search = window.location.search) {
-  const id = new URLSearchParams(search).get('event');
-  return EVENTS[id] || EVENTS[DEFAULT_EVENT_ID];
+export function eventUrl(id) {
+  return asset(`${id}/`);
+}
+
+export function resolveEvent(pathname = window.location.pathname, search = window.location.search) {
+  const fromAttr = typeof document !== 'undefined' && document.documentElement?.dataset?.event;
+  if (fromAttr && EVENTS[fromAttr]) return EVENTS[fromAttr];
+
+  const segments = pathname.split('/').filter(Boolean);
+  for (let i = segments.length - 1; i >= 0; i--) {
+    if (EVENTS[segments[i]]) return EVENTS[segments[i]];
+  }
+
+  const fromParam = new URLSearchParams(search).get('event');
+  if (fromParam && EVENTS[fromParam]) return EVENTS[fromParam];
+
+  return EVENTS[DEFAULT_EVENT_ID];
 }
