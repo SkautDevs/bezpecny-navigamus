@@ -4,10 +4,10 @@ import {
   applyChoice, checkFall, fallEndingId, goodEndingId, startNextDay, isRisky, topCauses,
 } from './engine.js';
 import {
-  EVENTS, resolveEvent, DAY_NAMES, DAY_NAMES_ACC, SLOT_NAMES, SLOT_ICONS,
+  resolveEvent, DAY_NAMES, DAY_NAMES_ACC, SLOT_NAMES, SLOT_ICONS,
   METER_ICONS, METER_NAMES,
 } from './events.js';
-import { $, el, setEventParam } from './dom.js';
+import { $, el } from './dom.js';
 
 const SWIPE_THRESHOLD = 90; // px of horizontal drag that commits a choice
 
@@ -57,11 +57,96 @@ function foundText() {
   return found.length ? `Objevené konce: ${found.length} / ${endings.length}` : '';
 }
 
-// ---------- event loading & skinning ----------
+// ---------- shell & event loading ----------
+
+function mountShell() {
+  const app = $('app');
+  if ($('screen-intro')) return;
+  app.innerHTML = `
+    <!-- Intro -->
+    <section id="screen-intro" class="screen" hidden>
+      <div class="panel">
+        <a href="../" class="back-link">← Změnit akci</a>
+        <p class="kicker" id="intro-kicker"></p>
+        <h1 id="intro-title" tabindex="-1"></h1>
+        <p id="intro-body"></p>
+        <p class="note">Kartu táhni doleva nebo doprava, nebo klepni na volbu.</p>
+        <p class="note">Na akci ti pomůžou: <b>SOS</b> (Skautská ochranná služba) kvůli bezpečí, <b id="service-health">SZT</b> (Skautský záchranný tým) kvůli zdraví, <b>Uši pro duši</b>, když je těžko na duši, <b>infostan</b> a <b id="service-info">registrace s informacemi</b>.</p>
+        <ul class="legend">
+          <li><span aria-hidden="true">🛡️</span> <b>Bezpečí</b> – jsou lidé kolem tebe v bezpečí</li>
+          <li><span aria-hidden="true">🤝</span> <b>Důvěra</b> – dá se za tebou přijít</li>
+          <li><span aria-hidden="true">👥</span> <b>Parta</b> – vztahy s ostatními</li>
+          <li><span aria-hidden="true">🔋</span> <b>Síly</b> – tvoje energie</li>
+        </ul>
+        <p class="note">Pozor: ani prázdný, ani přetékající ukazatel nevěstí nic dobrého.</p>
+        <p class="note warning-note">Hra obsahuje situace týkající se alkoholu, šikany, nevhodného chování a zneužívání. Pokud tě něco z toho tíží, zavolej na Skautskou krizovou linku <a href="tel:+420737205520">737 205 520</a> (nonstop) nebo napiš na <a href="mailto:poradna@skaut.cz">poradna@skaut.cz</a>.</p>
+        <div class="actions">
+          <button id="btn-continue" class="primary" hidden></button>
+          <button id="btn-new" class="primary"></button>
+        </div>
+        <p id="found-intro" class="found"></p>
+      </div>
+    </section>
+
+    <!-- Game -->
+    <section id="screen-game" class="screen" hidden>
+      <header class="meters" id="meters"></header>
+      <p class="when" id="when"></p>
+      <div class="stage">
+        <article class="card" id="card" tabindex="0" aria-live="polite">
+          <p class="choice-hint" id="choice-hint"></p>
+          <p class="character" id="character"></p>
+          <p class="text" id="text"></p>
+        </article>
+      </div>
+      <div class="choices">
+        <button id="btn-left" class="choice"></button>
+        <button id="btn-right" class="choice"></button>
+      </div>
+    </section>
+
+    <!-- Daily log -->
+    <section id="screen-log" class="screen" hidden>
+      <div class="panel">
+        <p class="kicker" id="log-kicker"></p>
+        <h2 id="log-title" tabindex="-1"></h2>
+        <ol id="log-list" class="log"></ol>
+        <div class="actions"><button id="btn-log-next" class="primary"></button></div>
+      </div>
+    </section>
+
+    <!-- Ending (fall or good) -->
+    <section id="screen-ending" class="screen" hidden>
+      <div class="panel">
+        <p class="ending-icon" id="ending-icon" aria-hidden="true"></p>
+        <p class="kicker" id="ending-kicker"></p>
+        <h2 id="ending-title" tabindex="-1"></h2>
+        <p id="ending-text"></p>
+        <p id="ending-near" class="near" hidden></p>
+        <div id="ending-causes" class="causes" hidden>
+          <p class="subhead">Co k tomu vedlo</p>
+          <ol id="causes-list" class="log"></ol>
+        </div>
+        <div class="debrief">
+          <p class="subhead" id="ending-debrief-heading"></p>
+          <p id="ending-debrief"></p>
+        </div>
+        <div id="seal" class="seal" hidden>
+          <p class="subhead" id="seal-title"></p>
+          <p class="seal-code" id="seal-code"></p>
+          <p class="note">Kód si ulož – budeš ho potřebovat při registraci.</p>
+        </div>
+        <p id="found-ending" class="found"></p>
+        <div class="actions"><button id="btn-ending-next" class="primary"></button></div>
+      </div>
+    </section>
+  `;
+}
 
 function applyEventChrome(ev) {
   document.title = ev.title;
-  $('event-theme').href = ev.css;
+  const themeLink = $('event-theme');
+  if (themeLink) themeLink.href = ev.css;
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) themeMeta.content = ev.themeColor;
 
@@ -75,20 +160,6 @@ function applyEventChrome(ev) {
   $('seal-title').textContent = ev.sealTitle;
 }
 
-function renderEventSwitcher() {
-  const box = $('event-switcher');
-  box.replaceChildren();
-  for (const ev of Object.values(EVENTS)) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'event-pill' + (ev.id === activeEvent.id ? ' active' : '');
-    btn.textContent = ev.label;
-    btn.setAttribute('aria-pressed', String(ev.id === activeEvent.id));
-    btn.onclick = () => switchEvent(ev.id);
-    box.append(btn);
-  }
-}
-
 async function loadEventData(ev) {
   const [nextCards, nextEndings] = await Promise.all([
     fetch(ev.cards).then((r) => r.json()),
@@ -99,14 +170,6 @@ async function loadEventData(ev) {
   endings = nextEndings;
   cardsById = new Map(cards.map((c) => [c.id, c]));
   applyEventChrome(ev);
-  renderEventSwitcher();
-}
-
-async function switchEvent(id) {
-  if (id === activeEvent.id || !EVENTS[id]) return;
-  await loadEventData(EVENTS[id]);
-  setEventParam(id);
-  showIntro();
 }
 
 // ---------- screens ----------
@@ -442,6 +505,7 @@ function setupSwipe() {
 // ---------- boot ----------
 
 async function boot() {
+  mountShell();
   await loadEventData(activeEvent);
   setupSwipe();
   $('btn-new').onclick = () => { state = newState(); startDay(); };
