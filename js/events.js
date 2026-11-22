@@ -56,26 +56,6 @@ export const EVENTS = {
     cards: asset('data/cards.json'),
     endings: asset('data/obrok/endings.json'),
   },
-  general: {
-    id: 'general',
-    label: 'Obecný',
-    title: 'Bezpečná akce',
-    kicker: 'Safe from Harm · Skautská akce',
-    intro: 'Tohle není test, ale trénink. Projdi čtyři dny velké skautské akce až do neděle a zjistíš, co v praxi platí. Když některý ukazatel spadne nebo přeteče, den si prostě zopakuješ. Na konci dostaneš pečeť.',
-    healthTeam: 'zdravotníci / SZT',
-    infoTeam: 'štáb akce',
-    ctaStart: 'Začít trénink',
-    logKicker: 'Deník dne',
-    logFinish: 'Dokončit akci',
-    debriefHeading: 'Na akci platí',
-    sealTitle: 'Pečeť Bezpečné akce',
-    sealPrefix: 'SFH',
-    themeColor: '#255C9E',
-    accentColor: '#B85637',
-    css: asset('themes/general.css'),
-    cards: asset('data/cards.json'),
-    endings: asset('data/general/endings.json'),
-  },
 };
 
 export const DEFAULT_EVENT_ID = 'navigamus';
