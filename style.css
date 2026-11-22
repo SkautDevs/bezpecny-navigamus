@@ -98,33 +98,72 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .legend li { margin: 0.25em 0; }
 .legend span { display: inline-block; width: 1.5em; }
 
-/* ---------- event switcher ---------- */
+/* ---------- event switcher (root hub) & back link ---------- */
 
-.event-switcher {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 4px;
-  margin: 0 0 12px;
-  background: var(--surface-alt);
-  border-radius: 999px;
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
   border: 1px solid var(--fading);
+  border-left: 5px solid var(--event-accent, var(--accent));
+  background: var(--surface-alt);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.event-pill {
-  min-height: 36px;
-  padding: 6px 14px;
+.event-card:hover {
+  border-color: var(--event-color, var(--brand));
+  border-left-color: var(--event-accent, var(--accent));
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+  transform: translateY(-1px);
+}
+
+.event-card:active { transform: scale(0.99); }
+.event-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.event-card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--event-accent, var(--accent));
+}
+
+.event-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--brand);
+}
+
+.event-card-status {
   font-size: 0.82rem;
-  font-weight: 600;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
   color: var(--ink-soft);
+  margin-top: 4px;
 }
 
-.event-pill.active {
-  background: var(--brand);
-  color: var(--brand-contrast);
+.back-link {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--brand);
+  text-decoration: underline;
 }
 
 /* ---------- buttons ---------- */
